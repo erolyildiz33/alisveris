@@ -189,7 +189,7 @@ class Galleries extends CI_Controller
 
         if($validate){
 
-            $path         = "uploads/galleries_v/";
+            $path         = "uploads/galleries_v";
             $folder_name = "";
 
             if($gallery_type == "image"){
@@ -460,7 +460,7 @@ class Galleries extends CI_Controller
 
             $uploaded_file = $this->upload->data("file_name");
 
-            $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
+            $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
 
             $this->$modelName->add(
                 array(
@@ -546,7 +546,7 @@ class Galleries extends CI_Controller
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "image";
 
-        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
+        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
 
         $viewData->items = $this->$modelName->get_all(
             array(
@@ -566,7 +566,7 @@ class Galleries extends CI_Controller
     public function fileDelete($id, $parent_id, $gallery_type){
 
 
-        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
+        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
 
         $fileName = $this->$modelName->get(
             array(
@@ -594,7 +594,7 @@ class Galleries extends CI_Controller
 
         if($id && $gallery_type){
 
-            $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
+            $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
 
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
@@ -617,7 +617,7 @@ class Galleries extends CI_Controller
 
         $items = $order["ord"];
 
-        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
+        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
 
         foreach ($items as $rank => $id){
 

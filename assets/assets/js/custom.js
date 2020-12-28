@@ -14,7 +14,7 @@ $(document).ready(function () {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Evet, Sil!',
-            cancelButtonText : "Hayır"
+            cancelButtonText: "Hayır"
         }).then(function (result) {
             if (result.value) {
 
@@ -24,15 +24,16 @@ $(document).ready(function () {
 
     })
 
-    $(".content-container, .image_list_container").on('change', '.isActive', function(){
+    $(".content-container, .image_list_container").on('change', '.isActive', function () {
 
         var $data = $(this).prop("checked");
         var $data_url = $(this).data("url");
 
-        var csrf_value 	= $(this).data("csrf-value");
-        if(typeof $data !== "undefined" && typeof $data_url !== "undefined"){
+        var csrf_value = $(this).data("csrf-value");
+        if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
 
-            $.post($data_url, { data : $data,csrf_test_name:csrf_value
+            $.post($data_url, {
+                data: $data, csrf_test_name: csrf_value
 
             }, function (response) {
 
@@ -42,14 +43,14 @@ $(document).ready(function () {
 
     })
 
-    $(".image_list_container").on('change', '.isCover', function(){
+    $(".image_list_container").on('change', '.isCover', function () {
 
         var $data = $(this).prop("checked");
         var $data_url = $(this).data("url");
 
-        if(typeof $data !== "undefined" && typeof $data_url !== "undefined"){
+        if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
 
-            $.post($data_url, { data : $data}, function (response) {
+            $.post($data_url, {data: $data}, function (response) {
 
                 $(".image_list_container").html(response);
 
@@ -74,13 +75,13 @@ $(document).ready(function () {
 
     })
 
-    $(".content-container, .image_list_container").on("sortupdate", '.sortable',  function(event, ui){
+    $(".content-container, .image_list_container").on("sortupdate", '.sortable', function (event, ui) {
 
         var $data = $(this).sortable("serialize");
         var $data_url = $(this).data("url");
-        var csrf_value 	= $(this).data("csrf-value");
+        var csrf_value = $(this).data("csrf-value");
 
-        $.post($data_url, {data : $data,csrf_test_name:csrf_value}, function(response){
+        $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
 
             $('.sortable .sirano').each(function (i) {
                 var humanNum = i + 1;
@@ -93,7 +94,7 @@ $(document).ready(function () {
     })
 
 
-    $(".button_usage_btn").change(function(){
+    $(".button_usage_btn").change(function () {
 
         $(".button-information-container").slideToggle();
 
@@ -101,12 +102,19 @@ $(document).ready(function () {
 
 
     var uploadSection = Dropzone.forElement("#dropzone");
+    uploadSection.on("sending", function (file, xhr, formData) {
+        console.log(this);
+        var csrf_value = $("#csrf_test_name").val();
+        formData.append('csrf_test_name', csrf_value);
 
-    uploadSection.on("complete", function(file){
+    });
+    uploadSection.on("complete", function (file) {
 
         var $data_url = $("#dropzone").data("url");
 
-        $.post($data_url, {}, function(response){
+        $.post($data_url, {
+            csrf_test_name: $("#csrf_test_name").val()
+        }, function (response) {
 
             $(".image_list_container").html(response);
 

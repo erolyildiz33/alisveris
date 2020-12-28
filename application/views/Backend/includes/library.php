@@ -1,4 +1,5 @@
 <script>
+
     var LIBS = {
         // Chart libraries
         plot: [
@@ -87,4 +88,5 @@
             "<?php echo base_url("assets"); ?>/assets/js/custom.js"
         ]
     };
+
 </script>

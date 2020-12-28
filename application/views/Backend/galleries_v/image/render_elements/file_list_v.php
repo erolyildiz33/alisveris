@@ -47,7 +47,7 @@
 
                 <td class="w100 text-center">
                     <button
-                        data-url="<?php echo base_url("galleries/fileDelete/$item->id/$item->gallery_id/$gallery_type"); ?>"
+                        data-url="<?php echo base_url("backend/galleries/fileDelete/$item->id/$item->gallery_id/$gallery_type"); ?>"
                         class="btn btn-sm btn-danger btn-outline remove-btn btn-block">
                         <i class="fa fa-trash"></i> Sil
                     </button>

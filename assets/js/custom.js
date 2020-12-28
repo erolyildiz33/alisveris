@@ -9,6 +9,7 @@
  */
 
 (function($){
+
 	$(document).ready(function(){
 
 		// Notify Plugin - The below code (until line 42) is used for demonstration purposes only
