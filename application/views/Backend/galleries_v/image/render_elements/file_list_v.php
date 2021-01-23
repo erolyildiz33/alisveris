@@ -15,7 +15,7 @@
         <th>Durumu</th>
         <th>İşlem</th>
         </thead>
-        <tbody class="sortable" data-url="<?php echo base_url("galleries/fileRankSetter/$gallery_type"); ?>">
+        <tbody class="sortable" data-url="<?php echo base_url("backend/galleries/fileRankSetter/$gallery_type"); ?>">
 
         <?php foreach($items as $item){ ?>
 
@@ -36,7 +36,7 @@
                 <td><?php echo $item->url; ?></td>
                 <td class="w100 text-center">
                     <input
-                        data-url="<?php echo base_url("galleries/fileIsActiveSetter/$item->id/$gallery_type"); ?>"
+                        data-url="<?php echo base_url("backend/galleries/fileIsActiveSetter/$item->id/$gallery_type"); ?>"
                         class="isActive"
                         type="checkbox"
                         data-switchery

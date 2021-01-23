@@ -51,7 +51,7 @@
                                 <td class="text-center">
                                     <button
                                         data-url="<?php echo base_url("backend/galleries/delete/$item->id"); ?>"
-                                        class="btn btn-sm btn-danger btn-outline remove-btn">
+                                        class="btn btn-sm btn-danger btn-outline remove-btn" data-analiste="evet">
                                         <i class="fa fa-trash"></i> Sil
                                     </button>
                                     <?php

@@ -546,7 +546,7 @@ class Galleries extends CI_Controller
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "image";
 
-        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
+        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
 
         $viewData->items = $this->$modelName->get_all(
             array(
@@ -566,7 +566,7 @@ class Galleries extends CI_Controller
     public function fileDelete($id, $parent_id, $gallery_type){
 
 
-        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
+        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
 
         $fileName = $this->$modelName->get(
             array(
@@ -579,13 +579,29 @@ class Galleries extends CI_Controller
                 "id"    => $id
             )
         );
+        $folderName = $this->gallery_model->get(
+            array(
+                "id"    => $parent_id
+            )
+        );
+
+        $delete_path   = ($gallery_type == "image") ? "./uploads/galleries_v/images/$folderName->folder_name/" : "./uploads/galleries_v/files/$folderName->folder_name/";
 
         // TODO Alert Sistemi Eklenecek...
         if($delete){
-            unlink($fileName->url);
-            redirect(base_url("backend/galleries/upload_form/$parent_id"));
+            if($gallery_type == "image") {
+                unlink($delete_path . DIRECTORY_SEPARATOR . '252x156' . DIRECTORY_SEPARATOR . $fileName->url);
+                unlink($delete_path . DIRECTORY_SEPARATOR . '350x216' . DIRECTORY_SEPARATOR . $fileName->url);
+                unlink($delete_path . DIRECTORY_SEPARATOR . '851x606' . DIRECTORY_SEPARATOR . $fileName->url);
+            }
+            else {
+                unlink($delete_path .  DIRECTORY_SEPARATOR . $fileName->url);
+
+            }
+           return $this->refresh_file_list($parent_id, $gallery_type, $folderName->folder_name);
         } else {
-            redirect(base_url("backend/galleries/upload_form/$parent_id"));
+            return $this->refresh_file_list($parent_id, $gallery_type, $folderName->folder_name);
+
         }
 
     }
@@ -594,7 +610,7 @@ class Galleries extends CI_Controller
 
         if($id && $gallery_type){
 
-            $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
+            $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
 
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
@@ -617,7 +633,7 @@ class Galleries extends CI_Controller
 
         $items = $order["ord"];
 
-        $modelName = ($gallery_type == "image") ? "backend/image_model" : "backend/file_model";
+        $modelName = ($gallery_type == "image") ? "image_model" : "file_model";
 
         foreach ($items as $rank => $id){
 

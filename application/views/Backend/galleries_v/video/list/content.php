@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <h4 class="m-b-lg">
             <?php echo "<b>$gallery->title</b> galerisine ait videolar" ; ?>
-            <a href="<?php echo base_url("galleries/new_gallery_video_form/$gallery->id"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
+            <a href="<?php echo base_url("backend/galleries/new_gallery_video_form/$gallery->id"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
         </h4>
     </div><!-- END column -->
     <div class="col-md-12">
@@ -11,7 +11,7 @@
             <?php if(empty($items)) { ?>
 
                 <div class="alert alert-info text-center">
-                    <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("galleries/new_gallery_video_form/$gallery->id"); ?>">tıklayınız</a></p>
+                    <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("backend/galleries/new_gallery_video_form/$gallery->id"); ?>">tıklayınız</a></p>
                 </div>
 
             <?php } else { ?>
@@ -25,7 +25,7 @@
                         <th>Durumu</th>
                         <th>İşlem</th>
                     </thead>
-                    <tbody class="sortable" data-url="<?php echo base_url("galleries/rankGalleryVideoSetter"); ?>">
+                    <tbody class="sortable" data-url="<?php echo base_url("backend/galleries/rankGalleryVideoSetter"); ?>">
 
                         <?php foreach($items as $item) { ?>
 
@@ -46,7 +46,7 @@
                                 </td>
                                 <td class="text-center w100">
                                     <input
-                                        data-url="<?php echo base_url("galleries/galleryVideoIsActiveSetter/$item->id"); ?>"
+                                        data-url="<?php echo base_url("backend/galleries/galleryVideoIsActiveSetter/$item->id"); ?>"
                                         class="isActive"
                                         type="checkbox"
                                         data-switchery
@@ -56,11 +56,11 @@
                                 </td>
                                 <td class="text-center w200">
                                     <button
-                                        data-url="<?php echo base_url("galleries/galleryVideoDelete/$item->id/$item->gallery_id"); ?>"
-                                        class="btn btn-sm btn-danger btn-outline remove-btn">
+                                        data-url="<?php echo base_url("backend/galleries/galleryVideoDelete/$item->id/$item->gallery_id"); ?>"
+                                        class="btn btn-sm btn-danger btn-outline remove-btn" data-analiste="evet">
                                         <i class="fa fa-trash"></i> Sil
                                     </button>
-                                    <a href="<?php echo base_url("galleries/update_gallery_video_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                    <a href="<?php echo base_url("backend/galleries/update_gallery_video_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
                                 </td>
                             </tr>
 

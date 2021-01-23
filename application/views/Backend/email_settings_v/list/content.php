@@ -43,8 +43,7 @@
                                 <td class="text-center"><?php echo $item->from; ?></td>
                                 <td class="text-center"><?php echo $item->to; ?></td>
                                 <td class="text-center w100">
-                                    <input
-                                            data-csrf-value="<?=$this->security->get_csrf_hash();?>"
+                                    <input data-csrf-value="<?=$this->security->get_csrf_hash();?>"
                                         data-url="<?php echo base_url("backend/emailsettings/isActiveSetter/$item->id"); ?>"
                                         class="isActive"
                                         type="checkbox"

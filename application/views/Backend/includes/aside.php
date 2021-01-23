@@ -1,5 +1,5 @@
 <?php $user = get_active_user(); ?>
-
+<input type="hidden" id="csrf_test_name" data-csrf="<?=$this->security->get_csrf_hash();?>">
 <aside id="menubar" class="menubar light">
     <div class="app-user">
         <div class="media">

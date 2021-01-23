@@ -1,5 +1,5 @@
 <?php
-
+define('PROJE_VERSION', '1.0.0.0.0');
 
 function get_product_cover_image($product_id){
 

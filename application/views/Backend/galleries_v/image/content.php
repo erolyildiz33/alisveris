@@ -3,6 +3,7 @@
         <div class="widget">
             <div class="widget-body">
                 <form data-csrf-value="<?= $this->security->get_csrf_hash(); ?>"
+                      data-csrf="<?=$this->security->get_csrf_hash();?>"
                       data-url="<?php echo base_url("backend/galleries/refresh_file_list/$item->id/$item->gallery_type/$item->folder_name"); ?>"
                       action="<?php echo base_url("backend/galleries/file_upload/$item->id/$item->gallery_type/$item->folder_name"); ?>"
                       id="dropzone" class="dropzone" data-plugin="dropzone"

@@ -7,9 +7,12 @@
     <div class="col-md-12">
         <div class="widget">
             <div class="widget-body">
-                <form action="<?php echo base_url("galleries/gallery_video_save/$gallery_id"); ?>" method="post">
+                <form action="<?php echo base_url("backend/galleries/gallery_video_save/$gallery_id"); ?>" method="post">
 
-                        <div class="form-group">
+                    <input type="hidden" name="csrf_test_name" value="<?=$this->security->get_csrf_hash();?>">
+
+
+                    <div class="form-group">
                             <label>Video URL</label>
                             <input class="form-control" placeholder="Video bağlantısını (id) buraya yapıştırınız" name="url">
                             <?php if(isset($form_error)){ ?>
@@ -18,7 +21,7 @@
                         </div>
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
-                    <a href="<?php echo base_url("galleries/gallery_video_list/$gallery_id"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+                    <a href="<?php echo base_url("backend/galleries/gallery_video_list/$gallery_id"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>
             </div><!-- .widget-body -->
         </div><!-- .widget -->

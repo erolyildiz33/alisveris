@@ -1,9 +1,10 @@
 $(document).ready(function () {
+    var csrf_value = $("#csrf_test_name").data("csrf");
 
     $(".sortable").sortable();
 
     $(".content-container, .image_list_container").on('click', '.remove-btn', function () {
-
+        var $ana = $(this).data("analiste");
         var $data_url = $(this).data("url");
 
         swal({
@@ -17,8 +18,40 @@ $(document).ready(function () {
             cancelButtonText: "Hayır"
         }).then(function (result) {
             if (result.value) {
+                if ($ana) {
+                    window.location.href = $data_url;
+                } else {
+                    $.post($data_url, {
+                        csrf_test_name: csrf_value,
+                    }, function (response) {
 
-                window.location.href = $data_url;
+                        $(".image_list_container").html(response);
+
+                        $('[data-switchery]').each(function () {
+                            var $this = $(this),
+                                color = $this.attr('data-color') || '#188ae2',
+                                jackColor = $this.attr('data-jackColor') || '#ffffff',
+                                size = $this.attr('data-size') || 'default'
+
+                            new Switchery(this, {
+                                color: color,
+                                size: size,
+                                jackColor: jackColor
+                            });
+                        });
+                        uploadSection.removeAllFiles();
+
+                        $(".sortable").sortable();
+                        iziToast.success({
+                            title: 'Resim Silme',
+                            message: 'Başarılı',
+                            position: 'topRight',
+
+                        });
+
+                    });
+                }
+
             }
         });
 
@@ -29,14 +62,19 @@ $(document).ready(function () {
         var $data = $(this).prop("checked");
         var $data_url = $(this).data("url");
 
-        var csrf_value = $(this).data("csrf-value");
+
         if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
 
             $.post($data_url, {
                 data: $data, csrf_test_name: csrf_value
 
             }, function (response) {
+                iziToast.success({
+                    title: 'Durum Değiştirme',
+                    message: 'Başarılı',
+                    position: 'topRight',
 
+                });
             });
 
         }
@@ -79,13 +117,19 @@ $(document).ready(function () {
 
         var $data = $(this).sortable("serialize");
         var $data_url = $(this).data("url");
-        var csrf_value = $(this).data("csrf-value");
+
 
         $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
 
             $('.sortable .sirano').each(function (i) {
                 var humanNum = i + 1;
                 $(this).html(humanNum + '');
+            });
+            iziToast.success({
+                title: 'Sıralama Değiştirme',
+                message: 'Başarılı',
+                position: 'topRight',
+
             });
 
 
@@ -100,20 +144,21 @@ $(document).ready(function () {
 
     })
 
-
+    Dropzone.autoDiscover = false;
     var uploadSection = Dropzone.forElement("#dropzone");
     uploadSection.on("sending", function (file, xhr, formData) {
-        console.log(this);
-        var csrf_value = $("#csrf_test_name").val();
-        formData.append('csrf_test_name', csrf_value);
+
+
+        formData.append(csrf_test_name, csrf_value);
 
     });
     uploadSection.on("complete", function (file) {
 
         var $data_url = $("#dropzone").data("url");
 
+
         $.post($data_url, {
-            csrf_test_name: $("#csrf_test_name").val()
+            csrf_test_name: csrf_value,
         }, function (response) {
 
             $(".image_list_container").html(response);
@@ -130,8 +175,15 @@ $(document).ready(function () {
                     jackColor: jackColor
                 });
             });
+            uploadSection.removeAllFiles();
 
             $(".sortable").sortable();
+            iziToast.success({
+                title: 'Resim Ekleme',
+                message: 'Başarılı',
+                position: 'topRight',
+
+            });
 
         });
 
