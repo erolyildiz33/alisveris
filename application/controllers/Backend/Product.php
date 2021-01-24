@@ -452,7 +452,7 @@ class Product extends CI_Controller
 
     public function image_upload($id){
 
-        $file_name = convertToSEO(pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+        $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
         $image_348x215 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",348,215, $file_name);
         $image_1080x426 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",1080,426, $file_name);

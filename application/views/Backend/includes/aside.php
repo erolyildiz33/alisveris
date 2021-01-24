@@ -138,7 +138,7 @@
 
                 <?php if (isAllowedViewModule("portfolio") && isAllowedViewModule("portfolio_categories")) { ?>
 
-                    <li class="portfoliohome has-submenu open">
+                    <li class="portfoliohome has-submenu">
                         <a href="javascript:void(0)" class="submenu-toggle">
                             <i class="menu-icon fa fa-asterisk"></i>
                             <span class="menu-text">Portfolyo İşlemleri</span>

@@ -446,7 +446,7 @@ class Galleries extends CI_Controller
 
     public function file_upload_old_method($gallery_id, $gallery_type, $folderName){
 
-        $file_name = convertToSEO(pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+        $file_name =  md5(date_timestamp_get(date_create()).Rand()). "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
         $config["allowed_types"] = "jpg|jpeg|png|pdf|doc|docx";
         $config["upload_path"]   = ($gallery_type == "image") ? "uploads/galleries_v/images/$folderName/" : "uploads/galleries_v/files/$folderName/";
@@ -480,7 +480,7 @@ class Galleries extends CI_Controller
 
     public function file_upload($gallery_id, $gallery_type, $folderName){
 
-        $file_name = convertToSEO(pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+        $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
         if($gallery_type == "image"){
 

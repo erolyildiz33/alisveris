@@ -89,7 +89,7 @@ class References extends CI_Controller
 
             // Upload Süreci...
 
-            $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+            $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
             $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",80,80, $file_name);
             $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",555,343, $file_name);
@@ -207,7 +207,7 @@ class References extends CI_Controller
             // Upload Süreci...
             if($_FILES["img_url"]["name"] !== "") {
 
-                $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
                 $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",80,80, $file_name);
                 $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",555,343, $file_name);

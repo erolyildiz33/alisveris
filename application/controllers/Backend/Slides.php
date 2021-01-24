@@ -93,7 +93,7 @@ class Slides extends CI_Controller
         if($validate){
 
             // Upload Süreci...
-            $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+            $file_name = md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
             $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1920,650, $file_name);
 
@@ -216,7 +216,7 @@ class Slides extends CI_Controller
             // Upload Süreci...
             if($_FILES["img_url"]["name"] !== "") {
 
-                $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
                 $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1920,650, $file_name);
 

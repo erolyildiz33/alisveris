@@ -92,7 +92,7 @@ class Testimonials extends CI_Controller
 
             // Upload Süreci...
 
-            $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+            $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
             $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",90,90, $file_name);
 
@@ -213,7 +213,7 @@ class Testimonials extends CI_Controller
             // Upload Süreci...
             if($_FILES["img_url"]["name"] !== "") {
 
-                $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
                 $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",90,90, $file_name);
 

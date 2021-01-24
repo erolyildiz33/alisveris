@@ -101,7 +101,7 @@ class News extends CI_Controller
 
                 // Upload Süreci...
 
-                $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
                 $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",513,289, $file_name);
                 $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",730,411, $file_name);
@@ -249,7 +249,7 @@ class News extends CI_Controller
 
                 if($_FILES["img_url"]["name"] !== "") {
 
-                    $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
+                    $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
                     $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",513,289, $file_name);
                     $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",730,411, $file_name);

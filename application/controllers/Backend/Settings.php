@@ -126,7 +126,7 @@ class Settings extends CI_Controller
 
             // Upload Süreci...
 
-            $file_name = convertToSEO($this->input->post("company_name")) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
+            $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
 
             $image_150x35 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/settings_v", 150, 35, $file_name);
             $image_300x70 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/settings_v", 300, 70, $file_name);
@@ -277,9 +277,9 @@ class Settings extends CI_Controller
             // Masaüstü Logosu için Upload Süreci...
             if ($_FILES["logo"]["name"] !== "") {
 
-                $file_name = convertToSEO($this->input->post("company_name")) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
 
-                $image_150x35 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/settings_v", 150, 35, $file_name);
+                $image_150x35 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/settings_v", 150, 35, "logo." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION));
 
                 if ($image_150x35) {
 
@@ -306,9 +306,9 @@ class Settings extends CI_Controller
             // Mobil Logosu için Upload Süreci...
             if ($_FILES["mobile_logo"]["name"] !== "") {
 
-                $file_name = convertToSEO($this->input->post("company_name")) . "." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION);
+                $file_name = md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION);
 
-                $image_300x70 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/settings_v", 300, 70, $file_name);
+                $image_300x70 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/settings_v", 300, 70,"mobile_logo." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION));
 
                 if ($image_300x70) {
 
@@ -335,9 +335,9 @@ class Settings extends CI_Controller
             // Favicon için Upload Süreci...
             if ($_FILES["favicon"]["name"] !== "") {
 
-                $file_name = convertToSEO($this->input->post("company_name")) . "." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION);
+                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION);
 
-                $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/settings_v", 32, 32, $file_name);
+                $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/settings_v", 32, 32,"favicon." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION));
 
                 if ($image_32x32) {
 
