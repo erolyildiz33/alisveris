@@ -3,17 +3,19 @@
 class Portfolio extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "portfolio_v";
+        $this->viewFolder = "backend/portfolio_v";
+        $this->viewFolderu = "portfolio_v";
 
-        $this->load->model("portfolio_model");
-        $this->load->model("portfolio_image_model");
-        $this->load->model("portfolio_category_model");
+        $this->load->model("backend/portfolio_model");
+        $this->load->model("backend/portfolio_image_model");
+        $this->load->model("backend/portfolio_category_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -32,6 +34,7 @@ class Portfolio extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -50,6 +53,7 @@ class Portfolio extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -113,7 +117,7 @@ class Portfolio extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("portfolio"));
+            redirect(base_url("backend/portfolio"));
 
         } else {
 
@@ -121,6 +125,7 @@ class Portfolio extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
@@ -220,7 +225,7 @@ class Portfolio extends CI_Controller
             }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("portfolio"));
+            redirect(base_url("backend/portfolio"));
 
         } else {
 
@@ -235,6 +240,7 @@ class Portfolio extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
             $viewData->item = $item;
@@ -283,7 +289,7 @@ class Portfolio extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("portfolio"));
+        redirect(base_url("backend/portfolio"));
 
 
     }
@@ -306,11 +312,15 @@ class Portfolio extends CI_Controller
         // TODO Alert Sistemi Eklenecek...
         if($delete){
 
-            unlink("uploads/{$this->viewFolder}/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/255x157/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/276x171/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/352x171/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/1080x426/$fileName->img_url");
 
-            redirect(base_url("portfolio/image_form/$parent_id"));
+
+            return $this->refresh_image_list($parent_id);
         } else {
-            redirect(base_url("portfolio/image_form/$parent_id"));
+            return $this->refresh_image_list($parent_id);
         }
 
     }
@@ -382,6 +392,7 @@ class Portfolio extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "image";
 
             $viewData->item_images = $this->portfolio_image_model->get_all(
@@ -453,6 +464,7 @@ class Portfolio extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "image";
 
         $viewData->item = $this->portfolio_model->get(
@@ -474,10 +486,10 @@ class Portfolio extends CI_Controller
 
         $file_name = convertToSEO(pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
-        $image_255x157  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",255,157, $file_name);
-        $image_276x171  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",276,171, $file_name);
-        $image_352x171  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",352,171, $file_name);
-        $image_1080x426 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",1080,426, $file_name);
+        $image_255x157  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",255,157, $file_name);
+        $image_276x171  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",276,171, $file_name);
+        $image_352x171  = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",352,171, $file_name);
+        $image_1080x426 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",1080,426, $file_name);
 
         if($image_255x157 && $image_276x171 && $image_352x171 && $image_1080x426){
 
@@ -505,6 +517,7 @@ class Portfolio extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "image";
 
         $viewData->item_images = $this->portfolio_image_model->get_all(

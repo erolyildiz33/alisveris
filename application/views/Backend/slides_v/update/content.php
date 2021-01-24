@@ -7,7 +7,10 @@
     <div class="col-md-12">
         <div class="widget">
             <div class="widget-body">
-                <form action="<?php echo base_url("slides/update/$item->id"); ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url("backend/slides/update/$item->id"); ?>" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+
+
                     <div class="form-group">
                         <label>Başlık</label>
                         <input class="form-control" placeholder="Başlık" name="title" value="<?php echo $item->title; ?>">
@@ -62,7 +65,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
-                    <a href="<?php echo base_url("slides"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+                    <a href="<?php echo base_url("backend/slides"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>
             </div><!-- .widget-body -->
         </div><!-- .widget -->

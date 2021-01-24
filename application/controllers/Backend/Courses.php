@@ -3,15 +3,17 @@
 class Courses extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "courses_v";
+        $this->viewFolder = "backend/courses_v";
+        $this->viewFolderu = "courses_v";
 
-        $this->load->model("course_model");
+        $this->load->model("backend/course_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -30,6 +32,7 @@ class Courses extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -42,6 +45,7 @@ class Courses extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -88,8 +92,8 @@ class Courses extends CI_Controller
 
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",255,157, $file_name);
-            $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",1140,705, $file_name);
+            $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",255,157, $file_name);
+            $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1140,705, $file_name);
 
             if($image_255x157 && $image_1140x705){
 
@@ -143,7 +147,7 @@ class Courses extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("courses"));
+            redirect(base_url("backend/courses"));
 
         } else {
 
@@ -151,6 +155,7 @@ class Courses extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
@@ -172,6 +177,7 @@ class Courses extends CI_Controller
         
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
@@ -205,8 +211,8 @@ class Courses extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",255,157, $file_name);
-                $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",1140,705, $file_name);
+                $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",255,157, $file_name);
+                $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1140,705, $file_name);
 
                 if($image_255x157 && $image_1140x705){
 
@@ -268,7 +274,7 @@ class Courses extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("courses"));
+            redirect(base_url("backend/courses"));
 
         } else {
 
@@ -276,6 +282,7 @@ class Courses extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
@@ -320,7 +327,7 @@ class Courses extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("courses"));
+        redirect(base_url("backend/courses"));
 
 
     }

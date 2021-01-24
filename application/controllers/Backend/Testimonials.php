@@ -3,15 +3,17 @@
 class Testimonials extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "testimonials_v";
+        $this->viewFolder = "backend/testimonials_v";
+        $this->viewFolderu = "testimonials_v";
 
-        $this->load->model("testimonial_model");
+        $this->load->model("backend/testimonial_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -30,6 +32,7 @@ class Testimonials extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -42,6 +45,7 @@ class Testimonials extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -65,7 +69,7 @@ class Testimonials extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("testimonials/new_form"));
+            redirect(base_url("backend/testimonials/new_form"));
 
             die();
         }
@@ -90,7 +94,7 @@ class Testimonials extends CI_Controller
 
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",90,90, $file_name);
+            $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",90,90, $file_name);
 
             if($image_90x90){
 
@@ -134,7 +138,7 @@ class Testimonials extends CI_Controller
 
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("testimonials/new_form"));
+                redirect(base_url("backend/testimonials/new_form"));
 
                 die();
 
@@ -143,7 +147,7 @@ class Testimonials extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("testimonials"));
+            redirect(base_url("backend/testimonials"));
 
         } else {
 
@@ -151,6 +155,7 @@ class Testimonials extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
@@ -172,6 +177,7 @@ class Testimonials extends CI_Controller
         
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
@@ -209,7 +215,7 @@ class Testimonials extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",90,90, $file_name);
+                $image_90x90 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",90,90, $file_name);
 
                 if($image_90x90){
 
@@ -231,7 +237,7 @@ class Testimonials extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("testimonials/update_form/$id"));
+                    redirect(base_url("backend/testimonials/update_form/$id"));
 
                     die();
 
@@ -271,7 +277,7 @@ class Testimonials extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("testimonials"));
+            redirect(base_url("backend/testimonials"));
 
         } else {
 
@@ -279,6 +285,7 @@ class Testimonials extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
@@ -323,7 +330,7 @@ class Testimonials extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("testimonials"));
+        redirect(base_url("backend/testimonials"));
 
 
     }

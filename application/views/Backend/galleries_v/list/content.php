@@ -27,7 +27,7 @@
                         <th>Durumu</th>
                         <th>İşlem</th>
                     </thead>
-                    <tbody class="sortable gallerylist"  data-csrf-value="<?=$this->security->get_csrf_hash();?>" data-url="<?php echo base_url("backend/galleries/rankSetter"); ?>">
+                    <tbody class="sortable gallerylist"  data-url="<?php echo base_url("backend/galleries/rankSetter"); ?>">
 
                         <?php $i=1; foreach($items as $item) { ?>
 

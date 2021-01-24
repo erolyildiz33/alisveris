@@ -3,15 +3,17 @@
 class Brands extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "brands_v";
+        $this->viewFolderu = "brands_v";
+        $this->viewFolder = "backend/brands_v";
 
-        $this->load->model("brand_model");
+        $this->load->model("backend/brand_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -30,6 +32,7 @@ class Brands extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -42,6 +45,7 @@ class Brands extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -65,7 +69,7 @@ class Brands extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("brands/new_form"));
+            redirect(base_url("backend/brands/new_form"));
 
             die();
         }
@@ -87,7 +91,7 @@ class Brands extends CI_Controller
 
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",350,216, $file_name);
+            $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",350,216, $file_name);
 
             if($image_350x216){
 
@@ -129,7 +133,7 @@ class Brands extends CI_Controller
 
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("brands/new_form"));
+                redirect(base_url("backend/brands/new_form"));
 
                 die();
 
@@ -138,7 +142,7 @@ class Brands extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("brands"));
+            redirect(base_url("backend/brands"));
 
         } else {
 
@@ -146,6 +150,7 @@ class Brands extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
@@ -167,6 +172,7 @@ class Brands extends CI_Controller
         
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
@@ -200,7 +206,7 @@ class Brands extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",350,216, $file_name);
+                $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",350,216, $file_name);
 
                 if($image_350x216){
 
@@ -219,7 +225,7 @@ class Brands extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("brands/update_form/$id"));
+                    redirect(base_url("backend/brands/update_form/$id"));
 
                     die();
 
@@ -256,7 +262,7 @@ class Brands extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("brands"));
+            redirect(base_url("backend/brands"));
 
         } else {
 
@@ -264,6 +270,7 @@ class Brands extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
@@ -308,7 +315,7 @@ class Brands extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("brands"));
+        redirect(base_url("backend/brands"));
 
 
     }

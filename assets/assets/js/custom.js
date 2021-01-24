@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var csrf_value = $("#csrf_test_name").data("csrf");
-
+ var csrf_test_name='csrf_test_name';
     $(".sortable").sortable();
 
     $(".content-container, .image_list_container").on('click', '.remove-btn', function () {
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
 
-            $.post($data_url, {data: $data}, function (response) {
+            $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
 
                 $(".image_list_container").html(response);
 
@@ -106,7 +106,12 @@ $(document).ready(function () {
                 });
 
                 $(".sortable").sortable();
+                iziToast.success({
+                    title: 'Kapak Durumu Değiştirme',
+                    message: 'Başarılı',
+                    position: 'topRight',
 
+                });
             });
 
         }

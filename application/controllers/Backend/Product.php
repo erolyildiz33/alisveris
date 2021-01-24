@@ -3,16 +3,18 @@
 class Product extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "product_v";
+        $this->viewFolder = "backend/product_v";
+        $this->viewFolderu = "product_v";
 
-        $this->load->model("product_model");
-        $this->load->model("product_image_model");
+        $this->load->model("backend/product_model");
+        $this->load->model("backend/product_image_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -31,6 +33,7 @@ class Product extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -103,7 +106,7 @@ class Product extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("product"));
+            redirect(base_url("backend/product"));
 
         } else {
 
@@ -199,7 +202,7 @@ class Product extends CI_Controller
             }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("product"));
+            redirect(base_url("backend/product"));
 
         } else {
 
@@ -257,7 +260,7 @@ class Product extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("product"));
+        redirect(base_url("backend/product"));
 
 
     }
@@ -280,11 +283,12 @@ class Product extends CI_Controller
         // TODO Alert Sistemi Eklenecek...
         if($delete){
 
-            unlink("uploads/{$this->viewFolder}/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/348x215/$fileName->img_url");
+            unlink("uploads/{$this->viewFolderu}/1080x426/$fileName->img_url");
 
-            redirect(base_url("product/image_form/$parent_id"));
+            return $this->refresh_image_list($parent_id);
         } else {
-            redirect(base_url("product/image_form/$parent_id"));
+            return $this->refresh_image_list($parent_id);
         }
 
     }
@@ -356,6 +360,7 @@ class Product extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "image";
 
             $viewData->item_images = $this->product_image_model->get_all(
@@ -427,6 +432,7 @@ class Product extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "image";
 
         $viewData->item = $this->product_model->get(
@@ -448,8 +454,8 @@ class Product extends CI_Controller
 
         $file_name = convertToSEO(pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
-        $image_348x215 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",348,215, $file_name);
-        $image_1080x426 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolder",1080,426, $file_name);
+        $image_348x215 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",348,215, $file_name);
+        $image_1080x426 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu",1080,426, $file_name);
 
         if($image_348x215 && $image_1080x426){
 
@@ -477,6 +483,7 @@ class Product extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "image";
 
         $viewData->item_images = $this->product_image_model->get_all(
@@ -490,5 +497,7 @@ class Product extends CI_Controller
         echo $render_html;
 
     }
+
+
 
 }

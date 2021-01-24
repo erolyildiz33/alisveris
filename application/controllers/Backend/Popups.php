@@ -9,9 +9,9 @@ class Popups extends CI_Controller
 
         parent::__construct();
 
-        $this->viewFolder = "popups_v";
+        $this->viewFolder = "backend/popups_v";
 
-        $this->load->model("popup_model");
+        $this->load->model("backend/popup_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -101,7 +101,7 @@ class Popups extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("popups"));
+            redirect(base_url("backend/popups"));
 
         } else {
 
@@ -190,7 +190,7 @@ class Popups extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("popups"));
+            redirect(base_url("backend/popups"));
 
         } else {
 
@@ -242,7 +242,7 @@ class Popups extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("popups"));
+        redirect(base_url("backend/popups"));
 
 
     }

@@ -9,9 +9,9 @@ class User_roles extends CI_Controller
 
         parent::__construct();
 
-        $this->viewFolder = "user_roles_v";
+        $this->viewFolder = "backend/user_roles_v";
 
-        $this->load->model("user_role_model");
+        $this->load->model("backend/user_role_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -96,7 +96,7 @@ class User_roles extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("user_roles"));
+            redirect(base_url("backend/user_roles"));
 
         } else {
 
@@ -180,7 +180,7 @@ class User_roles extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("user_roles"));
+            redirect(base_url("backend/user_roles"));
 
         } else {
 
@@ -232,7 +232,7 @@ class User_roles extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("user_roles"));
+        redirect(base_url("backend/user_roles"));
 
 
     }
@@ -308,7 +308,7 @@ class User_roles extends CI_Controller
         // İşlemin Sonucunu Session'a yazma işlemi...
         $this->session->set_flashdata("alert", $alert);
 
-        redirect(base_url("user_roles/permissions_form/$id"));
+        redirect(base_url("backend/user_roles/permissions_form/$id"));
     }
 
 

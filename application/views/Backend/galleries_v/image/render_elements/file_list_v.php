@@ -16,12 +16,11 @@
         <th>İşlem</th>
         </thead>
         <tbody class="sortable" data-url="<?php echo base_url("backend/galleries/fileRankSetter/$gallery_type"); ?>">
-
-        <?php foreach($items as $item){ ?>
+        <?php $i=1; foreach($items as $item) { ?>
 
             <tr id="ord-<?php echo $item->id; ?>">
                 <td class="order"><i class="fa fa-reorder"></i></td>
-                <td class="w50 text-center">#<?php echo $item->id; ?></td>
+                <td class="w50 text-center sirano"><?php echo $i++; ?></td>
                 <td class="w100 text-center">
                     <?php if($gallery_type == "image"){ ?>
                         <img

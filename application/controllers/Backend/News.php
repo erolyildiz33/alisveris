@@ -3,15 +3,17 @@
 class News extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "news_v";
+        $this->viewFolder = "backend/news_v";
+        $this->viewFolderu = "news_v";
 
-        $this->load->model("news_model");
+        $this->load->model("backend/news_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -29,6 +31,7 @@ class News extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -41,6 +44,7 @@ class News extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -68,7 +72,7 @@ class News extends CI_Controller
                 // İşlemin Sonucunu Session'a yazma işlemi...
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("news/new_form"));
+                redirect(base_url("backend/news/new_form"));
 
                 die();
             }
@@ -99,8 +103,8 @@ class News extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",513,289, $file_name);
-                $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",730,411, $file_name);
+                $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",513,289, $file_name);
+                $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",730,411, $file_name);
 
                 if($image_513x289 && $image_730x411){
 
@@ -126,7 +130,7 @@ class News extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("news/new_form"));
+                    redirect(base_url("backend/news/new_form"));
 
                     die();
 
@@ -171,7 +175,7 @@ class News extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("news"));
+            redirect(base_url("backend/news"));
 
         } else {
 
@@ -179,6 +183,7 @@ class News extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
             $viewData->news_type = $news_type;
@@ -201,6 +206,7 @@ class News extends CI_Controller
         
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
@@ -245,8 +251,8 @@ class News extends CI_Controller
 
                     $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                    $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",513,289, $file_name);
-                    $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",730,411, $file_name);
+                    $image_513x289 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",513,289, $file_name);
+                    $image_730x411 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",730,411, $file_name);
 
                     if($image_513x289 && $image_730x411){
 
@@ -321,7 +327,7 @@ class News extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("news"));
+            redirect(base_url("backend/news"));
 
         } else {
 
@@ -329,6 +335,7 @@ class News extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
             $viewData->news_type = $news_type;
@@ -374,7 +381,7 @@ class News extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("news"));
+        redirect(base_url("backend/news"));
 
 
     }

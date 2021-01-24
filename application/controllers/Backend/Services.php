@@ -9,17 +9,19 @@ class Services extends CI_Controller
 
         parent::__construct();
 
-        $this->viewFolder = "services_v";
+        $this->viewFolder = "backend/services_v";
+        $this->viewFolderu = "services_v";
 
-        $this->load->model("service_model");
+        $this->load->model("backend/service_model");
 
-        if(!get_active_user()){
+        if (!get_active_user()) {
             redirect(base_url("login"));
         }
 
     }
 
-    public function index(){
+    public function index()
+    {
 
         $viewData = new stdClass();
 
@@ -30,42 +32,46 @@ class Services extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
-    public function new_form(){
+    public function new_form()
+    {
 
         $viewData = new stdClass();
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
 
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->load->library("form_validation");
 
         // Kurallar yazilir..
 
-        if($_FILES["img_url"]["name"] == ""){
+        if ($_FILES["img_url"]["name"] == "") {
 
             $alert = array(
                 "title" => "İşlem Başarısız",
                 "text" => "Lütfen bir görsel seçiniz",
-                "type"  => "error"
+                "type" => "error"
             );
 
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("services/new_form"));
+            redirect(base_url("backend/services/new_form"));
 
             die();
         }
@@ -74,42 +80,42 @@ class Services extends CI_Controller
 
         $this->form_validation->set_message(
             array(
-                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+                "required" => "<b>{field}</b> alanı doldurulmalıdır"
             )
         );
 
         // Form Validation Calistirilir..
         $validate = $this->form_validation->run();
 
-        if($validate){
+        if ($validate) {
 
             // Upload Süreci...
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",555,343, $file_name);
-            $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",350,217, $file_name);
+            $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu", 555, 343, $file_name);
+            $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu", 350, 217, $file_name);
 
-            if($image_555x343 && $image_350x217){
+            if ($image_555x343 && $image_350x217) {
 
                 $insert = $this->service_model->add(
                     array(
-                        "title"         => $this->input->post("title"),
-                        "description"   => $this->input->post("description"),
-                        "url"           => convertToSEO($this->input->post("title")),
-                        "img_url"       => $file_name,
-                        "rank"          => 0,
-                        "isActive"      => 1,
-                        "createdAt"     => date("Y-m-d H:i:s")
+                        "title" => $this->input->post("title"),
+                        "description" => $this->input->post("description"),
+                        "url" => convertToSEO($this->input->post("title")),
+                        "img_url" => $file_name,
+                        "rank" => 0,
+                        "isActive" => 1,
+                        "createdAt" => date("Y-m-d H:i:s")
                     )
                 );
 
                 // TODO Alert sistemi eklenecek...
-                if($insert){
+                if ($insert) {
 
                     $alert = array(
                         "title" => "İşlem Başarılı",
                         "text" => "Kayıt başarılı bir şekilde eklendi",
-                        "type"  => "success"
+                        "type" => "success"
                     );
 
                 } else {
@@ -117,7 +123,7 @@ class Services extends CI_Controller
                     $alert = array(
                         "title" => "İşlem Başarısız",
                         "text" => "Kayıt Ekleme sırasında bir problem oluştu",
-                        "type"  => "error"
+                        "type" => "error"
                     );
                 }
 
@@ -126,12 +132,12 @@ class Services extends CI_Controller
                 $alert = array(
                     "title" => "İşlem Başarısız",
                     "text" => "Görsel yüklenirken bir problem oluştu",
-                    "type"  => "error"
+                    "type" => "error"
                 );
 
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("services/new_form"));
+                redirect(base_url("backend/services/new_form"));
 
                 die();
 
@@ -140,7 +146,7 @@ class Services extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("services"));
+            redirect(base_url("backend/services"));
 
         } else {
 
@@ -156,17 +162,18 @@ class Services extends CI_Controller
 
     }
 
-    public function update_form($id){
+    public function update_form($id)
+    {
 
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
         $item = $this->service_model->get(
             array(
-                "id"    => $id,
+                "id" => $id,
             )
         );
-        
+
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "update";
@@ -178,7 +185,8 @@ class Services extends CI_Controller
     }
 
 
-    public function update($id){
+    public function update($id)
+    {
 
         $this->load->library("form_validation");
 
@@ -188,24 +196,24 @@ class Services extends CI_Controller
 
         $this->form_validation->set_message(
             array(
-                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+                "required" => "<b>{field}</b> alanı doldurulmalıdır"
             )
         );
 
         // Form Validation Calistirilir..
         $validate = $this->form_validation->run();
 
-        if($validate){
+        if ($validate) {
 
             // Upload Süreci...
-            if($_FILES["img_url"]["name"] !== "") {
+            if ($_FILES["img_url"]["name"] !== "") {
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",555,343, $file_name);
-                $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",350,217, $file_name);
+                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder", 555, 343, $file_name);
+                $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder", 350, 217, $file_name);
 
-                if($image_555x343 && $image_350x217){
+                if ($image_555x343 && $image_350x217) {
 
                     $data = array(
                         "title" => $this->input->post("title"),
@@ -224,7 +232,7 @@ class Services extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("services/update_form/$id"));
+                    redirect(base_url("backend/services/update_form/$id"));
 
                     die();
 
@@ -243,12 +251,12 @@ class Services extends CI_Controller
             $update = $this->service_model->update(array("id" => $id), $data);
 
             // TODO Alert sistemi eklenecek...
-            if($update){
+            if ($update) {
 
                 $alert = array(
                     "title" => "İşlem Başarılı",
                     "text" => "Kayıt başarılı bir şekilde güncellendi",
-                    "type"  => "success"
+                    "type" => "success"
                 );
 
             } else {
@@ -256,14 +264,14 @@ class Services extends CI_Controller
                 $alert = array(
                     "title" => "İşlem Başarısız",
                     "text" => "Kayıt Güncelleme sırasında bir problem oluştu",
-                    "type"  => "error"
+                    "type" => "error"
                 );
             }
 
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("services"));
+            redirect(base_url("backend/services"));
 
         } else {
 
@@ -277,7 +285,7 @@ class Services extends CI_Controller
             /** Tablodan Verilerin Getirilmesi.. */
             $viewData->item = $this->service_model->get(
                 array(
-                    "id"    => $id,
+                    "id" => $id,
                 )
             );
 
@@ -286,21 +294,22 @@ class Services extends CI_Controller
 
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
         $delete = $this->service_model->delete(
             array(
-                "id"    => $id
+                "id" => $id
             )
         );
 
         // TODO Alert Sistemi Eklenecek...
-        if($delete){
+        if ($delete) {
 
             $alert = array(
                 "title" => "İşlem Başarılı",
                 "text" => "Kayıt başarılı bir şekilde silindi",
-                "type"  => "success"
+                "type" => "success"
             );
 
         } else {
@@ -308,36 +317,38 @@ class Services extends CI_Controller
             $alert = array(
                 "title" => "İşlem Başarılı",
                 "text" => "Kayıt silme sırasında bir problem oluştu",
-                "type"  => "error"
+                "type" => "error"
             );
 
 
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("services"));
+        redirect(base_url("backend/services"));
 
 
     }
 
-    public function isActiveSetter($id){
+    public function isActiveSetter($id)
+    {
 
-        if($id){
+        if ($id) {
 
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
             $this->service_model->update(
                 array(
-                    "id"    => $id
+                    "id" => $id
                 ),
                 array(
-                    "isActive"  => $isActive
+                    "isActive" => $isActive
                 )
             );
         }
     }
 
-    public function rankSetter(){
+    public function rankSetter()
+    {
 
 
         $data = $this->input->post("data");
@@ -346,15 +357,15 @@ class Services extends CI_Controller
 
         $items = $order["ord"];
 
-        foreach ($items as $rank => $id){
+        foreach ($items as $rank => $id) {
 
             $this->service_model->update(
                 array(
-                    "id"        => $id,
-                    "rank !="   => $rank
+                    "id" => $id,
+                    "rank !=" => $rank
                 ),
                 array(
-                    "rank"      => $rank
+                    "rank" => $rank
                 )
             );
 

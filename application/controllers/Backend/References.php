@@ -3,15 +3,17 @@
 class References extends CI_Controller
 {
     public $viewFolder = "";
+    public $viewFolderu = "";
 
     public function __construct()
     {
 
         parent::__construct();
 
-        $this->viewFolder = "references_v";
+        $this->viewFolderu = "references_v";
+        $this->viewFolder = "backend/references_v";
 
-        $this->load->model("reference_model");
+        $this->load->model("backend/reference_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -30,6 +32,7 @@ class References extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "list";
         $viewData->items = $items;
 
@@ -42,6 +45,7 @@ class References extends CI_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -65,7 +69,7 @@ class References extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("references/new_form"));
+            redirect(base_url("backend/references/new_form"));
 
             die();
         }
@@ -87,8 +91,8 @@ class References extends CI_Controller
 
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",80,80, $file_name);
-            $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",555,343, $file_name);
+            $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",80,80, $file_name);
+            $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",555,343, $file_name);
 
             if($image_80x80 && $image_555x343){
 
@@ -132,7 +136,7 @@ class References extends CI_Controller
 
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("references/new_form"));
+                redirect(base_url("backend/references/new_form"));
 
                 die();
 
@@ -141,7 +145,7 @@ class References extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("references"));
+            redirect(base_url("backend/references"));
 
         } else {
 
@@ -149,6 +153,7 @@ class References extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
@@ -170,6 +175,7 @@ class References extends CI_Controller
         
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
+        $viewData->viewFolderu = $this->viewFolderu;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
@@ -203,8 +209,8 @@ class References extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",80,80, $file_name);
-                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",555,343, $file_name);
+                $image_80x80 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",80,80, $file_name);
+                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",555,343, $file_name);
 
                 if($image_80x80 && $image_555x343){
 
@@ -225,7 +231,7 @@ class References extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("references/update_form/$id"));
+                    redirect(base_url("backend/references/update_form/$id"));
 
                     die();
 
@@ -264,7 +270,7 @@ class References extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("references"));
+            redirect(base_url("backend/references"));
 
         } else {
 
@@ -272,6 +278,7 @@ class References extends CI_Controller
 
             /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
             $viewData->viewFolder = $this->viewFolder;
+            $viewData->viewFolderu = $this->viewFolderu;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
@@ -316,7 +323,7 @@ class References extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("references"));
+        redirect(base_url("backend/references"));
 
 
     }

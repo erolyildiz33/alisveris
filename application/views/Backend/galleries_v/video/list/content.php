@@ -19,7 +19,7 @@
                 <table class="table table-hover table-striped table-bordered content-container">
                     <thead>
                         <th class="order"><i class="fa fa-reorder"></i></th>
-                        <th class="w50">#id</th>
+                        <th class="w50">Sıra</th>
                         <th>url</th>
                         <th>Görsel</th>
                         <th>Durumu</th>
@@ -27,11 +27,11 @@
                     </thead>
                     <tbody class="sortable" data-url="<?php echo base_url("backend/galleries/rankGalleryVideoSetter"); ?>">
 
-                        <?php foreach($items as $item) { ?>
+                    <?php $i=1; foreach($items as $item) { ?>
 
-                            <tr id="ord-<?php echo $item->id; ?>">
-                                <td class="order"><i class="fa fa-reorder"></i></td>
-                                <td class="w50 text-center">#<?php echo $item->id; ?></td>
+                        <tr id="ord-<?php echo $item->id; ?>">
+                            <td class="order"><i class="fa fa-reorder"></i></td>
+                            <td class="w50 text-center sirano"><?php echo $i++; ?></td>
                                 <td class="text-center"><?php echo $item->url; ?></td>
                                 <td class="text-center w100">
                                     <iframe

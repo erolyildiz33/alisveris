@@ -9,9 +9,10 @@ class Slides extends CI_Controller
 
         parent::__construct();
 
-        $this->viewFolder = "slides_v";
+        $this->viewFolder = "backend/slides_v";
+        $this->viewFolderu = "slides_v";
 
-        $this->load->model("slide_model");
+        $this->load->model("backend/slide_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -66,7 +67,7 @@ class Slides extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("slides/new_form"));
+            redirect(base_url("backend/slides/new_form"));
 
             die();
         }
@@ -94,7 +95,7 @@ class Slides extends CI_Controller
             // Upload Süreci...
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-            $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",1920,650, $file_name);
+            $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1920,650, $file_name);
 
             if($image_1920x650){
 
@@ -140,7 +141,7 @@ class Slides extends CI_Controller
 
                 $this->session->set_flashdata("alert", $alert);
 
-                redirect(base_url("slides/new_form"));
+                redirect(base_url("backend/slides/new_form"));
 
                 die();
 
@@ -149,7 +150,7 @@ class Slides extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("slides"));
+            redirect(base_url("backend/slides"));
 
         } else {
 
@@ -217,7 +218,7 @@ class Slides extends CI_Controller
 
                 $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder",1920,650, $file_name);
+                $image_1920x650 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu",1920,650, $file_name);
 
                 if($image_1920x650){
 
@@ -240,7 +241,7 @@ class Slides extends CI_Controller
 
                     $this->session->set_flashdata("alert", $alert);
 
-                    redirect(base_url("slides/update_form/$id"));
+                    redirect(base_url("backend/slides/update_form/$id"));
 
                     die();
 
@@ -281,7 +282,7 @@ class Slides extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("slides"));
+            redirect(base_url("backend/slides"));
 
         } else {
 
@@ -333,7 +334,7 @@ class Slides extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("slides"));
+        redirect(base_url("backend/slides"));
 
 
     }

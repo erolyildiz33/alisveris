@@ -57,7 +57,7 @@
 
 
                 <?php if (isAllowedViewModule("dashboard")) { ?>
-                    <li>
+                    <li class="dashboard" >
                         <a href="<?php echo base_url("admin"); ?>">
                             <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
                             <span class="menu-text">Dashboard</span>
@@ -66,7 +66,7 @@
                 <?php } ?>
 
                 <?php if (isAllowedViewModule("settings")) { ?>
-                    <li>
+                    <li class="settings">
                         <a href="<?php echo base_url("backend/settings"); ?>">
                             <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
                             <span class="menu-text">Site Ayarları</span>
@@ -77,7 +77,7 @@
 
                 <?php if (isAllowedViewModule("emailsettings")) { ?>
 
-                    <li>
+                    <li class="emailsettings">
                         <a href="<?php echo base_url("backend/emailsettings"); ?>">
                             <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
                             <span class="menu-text">E-posta Ayarları</span>
@@ -89,7 +89,7 @@
 
                 <?php if (isAllowedViewModule("galleries")) { ?>
 
-                    <li>
+                    <li class="galleries">
                         <a href="<?php echo base_url("backend/galleries"); ?>">
                             <i class="menu-icon zmdi zmdi-apps zmdi-hc-lg"></i>
                             <span class="menu-text">Galeri İşlemleri</span>
@@ -102,8 +102,8 @@
 
                 <?php if (isAllowedViewModule("slides")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("slides"); ?>">
+                    <li class="slides">
+                        <a href="<?php echo base_url("backend/slides"); ?>">
                             <i class="menu-icon zmdi zmdi-layers zmdi-hc-lg"></i>
                             <span class="menu-text">Slider</span>
                         </a>
@@ -114,8 +114,8 @@
 
                 <?php if (isAllowedViewModule("product")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("product"); ?>">
+                    <li class="product" >
+                        <a href="<?php echo base_url("backend/product"); ?>">
                             <i class="menu-icon fa fa-cubes"></i>
                             <span class="menu-text">Ürünler</span>
                         </a>
@@ -126,8 +126,8 @@
 
                 <?php if (isAllowedViewModule("services")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("services"); ?>">
+                    <li class="services">
+                        <a href="<?php echo base_url("backend/services"); ?>">
                             <i class="menu-icon fa fa-cutlery"></i>
                             <span class="menu-text">Hizmetlerimiz</span>
                         </a>
@@ -138,20 +138,20 @@
 
                 <?php if (isAllowedViewModule("portfolio") && isAllowedViewModule("portfolio_categories")) { ?>
 
-                    <li class="has-submenu">
+                    <li class="portfoliohome has-submenu open">
                         <a href="javascript:void(0)" class="submenu-toggle">
                             <i class="menu-icon fa fa-asterisk"></i>
                             <span class="menu-text">Portfolyo İşlemleri</span>
                             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
                         </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo base_url("portfolio_categories"); ?>">
+                        <ul  class="submenu">
+                            <li class="portfolio_categories">
+                                <a href="<?php echo base_url("backend/portfolio_categories"); ?>">
                                     <span class="menu-text">Portfolyo Kategorileri</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url("portfolio"); ?>">
+                            <li class="portfolio">
+                                <a href="<?php echo base_url("backend/portfolio"); ?>">
                                     <span class="menu-text">Portfolyo</span>
                                 </a>
                             </li>
@@ -163,8 +163,8 @@
 
                 <?php if (isAllowedViewModule("news")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("news"); ?>">
+                    <li class="news">
+                        <a href="<?php echo base_url("backend/news"); ?>">
                             <i class="menu-icon fa fa-newspaper-o"></i>
                             <span class="menu-text">Haberler</span>
                         </a>
@@ -175,8 +175,8 @@
 
                 <?php if (isAllowedViewModule("courses")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("courses"); ?>">
+                    <li class="courses">
+                        <a href="<?php echo base_url("backend/courses"); ?>">
                             <i class="menu-icon fa fa-calendar"></i>
                             <span class="menu-text">Eğitimler</span>
                         </a>
@@ -187,8 +187,8 @@
 
                 <?php if (isAllowedViewModule("references")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("references"); ?>">
+                    <li class="references">
+                        <a href="<?php echo base_url("backend/references"); ?>">
                             <i class="menu-icon zmdi zmdi-check zmdi-hc-lg"></i>
                             <span class="menu-text">Referanslar</span>
                         </a>
@@ -199,8 +199,8 @@
 
                 <?php if (isAllowedViewModule("brands")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("brands"); ?>">
+                    <li class="brands">
+                        <a href="<?php echo base_url("backend/brands"); ?>">
                             <i class="menu-icon zmdi zmdi-puzzle-piece zmdi-hc-lg"></i>
                             <span class="menu-text">Markalar</span>
                         </a>
@@ -211,8 +211,8 @@
 
                 <?php if (isAllowedViewModule("user_roles")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("user_roles"); ?>">
+                    <li class="user_roles">
+                        <a href="<?php echo base_url("backend/user_roles"); ?>">
                             <i class="menu-icon fa fa-eye"></i>
                             <span class="menu-text">Kullanıcı Rolü</span>
                         </a>
@@ -223,8 +223,8 @@
 
                 <?php if (isAllowedViewModule("users")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("users"); ?>">
+                    <li class="users">
+                        <a href="<?php echo base_url("backend/users"); ?>">
                             <i class="menu-icon fa fa-user-secret"></i>
                             <span class="menu-text">Kullanıcılar</span>
                         </a>
@@ -235,8 +235,8 @@
 
                 <?php if (isAllowedViewModule("members")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("members"); ?>">
+                    <li class="members">
+                        <a href="<?php echo base_url("backend/members"); ?>">
                             <i class="menu-icon fa fa-users"></i>
                             <span class="menu-text">Aboneler</span>
                         </a>
@@ -247,8 +247,8 @@
 
                 <?php if (isAllowedViewModule("testimonials")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("testimonials"); ?>">
+                    <li class="testimonials">
+                        <a href="<?php echo base_url("backend/testimonials"); ?>">
                             <i class="menu-icon fa fa-comments"></i>
                             <span class="menu-text">Ziyaretçi Notları</span>
                         </a>
@@ -260,8 +260,8 @@
 
                 <?php if (isAllowedViewModule("popups")) { ?>
 
-                    <li>
-                        <a href="<?php echo base_url("popups"); ?>">
+                    <li class="popups">
+                        <a href="<?php echo base_url("backend/popups"); ?>">
                             <i class="menu-icon zmdi zmdi-lamp zmdi-hc-lg"></i>
                             <span class="menu-text">Popup Hizmeti</span>
                         </a>
@@ -270,8 +270,8 @@
                 <?php } ?>
 
 
-                <li>
-                    <a href="documentation.html">
+                <li >
+                    <a href="<?php echo base_url();?>>">
                         <i class="menu-icon zmdi zmdi-view-web zmdi-hc-lg"></i>
                         <span class="menu-text">Ana Sayfa</span>
                     </a>

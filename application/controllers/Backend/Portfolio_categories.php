@@ -9,9 +9,9 @@ class Portfolio_categories extends CI_Controller
 
         parent::__construct();
 
-        $this->viewFolder = "portfolio_categories_v";
+        $this->viewFolder = "backend/portfolio_categories_v";
 
-        $this->load->model("portfolio_category_model");
+        $this->load->model("backend/portfolio_category_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -97,7 +97,7 @@ class Portfolio_categories extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("portfolio_categories"));
+            redirect(base_url("backend/portfolio_categories"));
 
         } else {
 
@@ -184,7 +184,7 @@ class Portfolio_categories extends CI_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("portfolio_categories"));
+            redirect(base_url("backend/portfolio_categories"));
 
         } else {
 
@@ -236,7 +236,7 @@ class Portfolio_categories extends CI_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("portfolio_categories"));
+        redirect(base_url("backend/portfolio_categories"));
 
 
     }
