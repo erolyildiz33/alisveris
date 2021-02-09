@@ -305,6 +305,22 @@ function get_settings(){
     return $settings;
 
 }
+function get_sub_category_title($category_id = 0){
+
+    $t = &get_instance();
+
+    $t->load->model("backend/product_category_model");
+
+    $category = $t->product_category_model->get(
+        array(
+            "ustmenu"    => $category_id
+        )
+    );
+
+
+    return $category;
+
+}
 
 function get_category_title($category_id = 0){
 
@@ -324,7 +340,6 @@ function get_category_title($category_id = 0){
         return "<b style='color:red'>Tanımlı Değil</b>";
 
 }
-
 function upload_picture($file, $uploadPath, $width, $height, $name){
 
     $t = &get_instance();
@@ -341,9 +356,9 @@ function upload_picture($file, $uploadPath, $width, $height, $name){
         $simpleImage = $t->simpleimagelib->get_simple_image_instance();
 
         $simpleImage
-            ->fromFile($file)
-            ->thumbnail($width,$height,'center')
-            ->toFile("{$uploadPath}/{$width}x{$height}/$name", null, 75);
+        ->fromFile($file)
+        ->thumbnail($width,$height,'center')
+        ->toFile("{$uploadPath}/{$width}x{$height}/$name", null, 75);
 
     } catch(Exception $err) {
         $error =  $err->getMessage();

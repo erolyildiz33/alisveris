@@ -74,9 +74,9 @@
         } else if (segment_2 === 'popups') {
             $('.popups').addClass('active');
         }
-        console.log(segment_2);
+        
 
 
     });
 </script>
-<!--<script src="--><?php //echo base_url("assets"); ?><!--/assets/js/custom.js?v=<?php echo PROJE_VERSION; ?>"></script>-->
+

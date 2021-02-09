@@ -1,6 +1,15 @@
 $(document).ready(function () {
+    $(".altgetir").click(function() {
+        altid=$(this).data("altid");
+        var content = "<div data-role='collapsible' id='alticerik" + altid + "'><h3>Section " + altid + "</h3><p>I am the collapsible content in a set so this feels like an accordion. I am hidden by default because I have the 'collapsed' state; you need to expand the header to see me.</p></div>";
+        $("#alticerik"+ altid).append( content ).collapsibleset('refresh');
+        $("#alticerik"+altid).trigger( "expand" );
+    });
+
+
+
     var csrf_value = $("#csrf_test_name").data("csrf");
- var csrf_test_name='csrf_test_name';
+    var csrf_test_name='csrf_test_name';
     $(".sortable").sortable();
 
     $(".content-container, .image_list_container").on('click', '.remove-btn', function () {
@@ -29,9 +38,9 @@ $(document).ready(function () {
 
                         $('[data-switchery]').each(function () {
                             var $this = $(this),
-                                color = $this.attr('data-color') || '#188ae2',
-                                jackColor = $this.attr('data-jackColor') || '#ffffff',
-                                size = $this.attr('data-size') || 'default'
+                            color = $this.attr('data-color') || '#188ae2',
+                            jackColor = $this.attr('data-jackColor') || '#ffffff',
+                            size = $this.attr('data-size') || 'default'
 
                             new Switchery(this, {
                                 color: color,
@@ -94,9 +103,9 @@ $(document).ready(function () {
 
                 $('[data-switchery]').each(function () {
                     var $this = $(this),
-                        color = $this.attr('data-color') || '#188ae2',
-                        jackColor = $this.attr('data-jackColor') || '#ffffff',
-                        size = $this.attr('data-size') || 'default'
+                    color = $this.attr('data-color') || '#188ae2',
+                    jackColor = $this.attr('data-jackColor') || '#ffffff',
+                    size = $this.attr('data-size') || 'default'
 
                     new Switchery(this, {
                         color: color,
@@ -170,9 +179,9 @@ $(document).ready(function () {
 
             $('[data-switchery]').each(function () {
                 var $this = $(this),
-                    color = $this.attr('data-color') || '#188ae2',
-                    jackColor = $this.attr('data-jackColor') || '#ffffff',
-                    size = $this.attr('data-size') || 'default'
+                color = $this.attr('data-color') || '#188ae2',
+                jackColor = $this.attr('data-jackColor') || '#ffffff',
+                size = $this.attr('data-size') || 'default'
 
                 new Switchery(this, {
                     color: color,
