@@ -10,6 +10,7 @@ class Galleries extends CI_Controller
         parent::__construct();
 
         $this->viewFolder = "backend/galleries_v";
+        $this->viewFolderu = "galleries_v";
 
         $this->load->model("backend/gallery_model");
         $this->load->model("backend/image_model");
@@ -19,6 +20,11 @@ class Galleries extends CI_Controller
         if(!get_active_user()){
             redirect(base_url("login"));
         }
+        if(!is_dir("uploads/$this->viewFolderu")) mkdir("uploads/$this->viewFolderu", 0777, TRUE);
+        if(!is_dir("uploads/$this->viewFolderu/images")) mkdir("uploads/$this->viewFolderu/images", 0777, TRUE);
+        if(!is_dir("uploads/$this->viewFolderu/files")) mkdir("uploads/$this->viewFolderu/files", 0777, TRUE);
+        
+        
     }
 
     public function index(){
@@ -68,7 +74,7 @@ class Galleries extends CI_Controller
         if($validate){
 
             $gallery_type = $this->input->post("gallery_type");
-            $path         = "uploads/galleries_v/";
+            $path         = "uploads/$this->viewFolderu/";
             $folder_name = "";
 
             if($gallery_type == "image"){
@@ -189,7 +195,7 @@ class Galleries extends CI_Controller
 
         if($validate){
 
-            $path         = "uploads/galleries_v";
+            $path         = "uploads/$this->viewFolderu/";
             $folder_name = "";
 
             if($gallery_type == "image"){
@@ -295,9 +301,9 @@ class Galleries extends CI_Controller
             if($gallery->gallery_type != "video"){
 
                 if($gallery->gallery_type == "image")
-                    $path = "uploads/galleries_v/images/$gallery->folder_name";
+                    $path = "uploads/$this->viewFolderu/images/$gallery->folder_name";
                 else if($gallery->gallery_type == "file")
-                    $path = "uploads/galleries_v/files/$gallery->folder_name";
+                    $path = "uploads/$this->viewFolderu/files/$gallery->folder_name";
 
                 $delete_folder = rmdir($path);
 
@@ -449,7 +455,7 @@ class Galleries extends CI_Controller
         $file_name =  md5(date_timestamp_get(date_create()).Rand()). "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 
         $config["allowed_types"] = "jpg|jpeg|png|pdf|doc|docx";
-        $config["upload_path"]   = ($gallery_type == "image") ? "uploads/galleries_v/images/$folderName/" : "uploads/galleries_v/files/$folderName/";
+        $config["upload_path"]   = ($gallery_type == "image") ? "uploads/$this->viewFolderu/images/$folderName/" : "uploads/$this->viewFolderu/files/$folderName/";
         $config["file_name"]     = $file_name;
 
         $this->load->library("upload", $config);
@@ -485,9 +491,9 @@ class Galleries extends CI_Controller
         if($gallery_type == "image"){
 
             // simple Image...
-            $image_252x156 = upload_picture($_FILES["file"]["tmp_name"], "uploads/galleries_v/images/$folderName/",252,156, $file_name);
-            $image_350x216 = upload_picture($_FILES["file"]["tmp_name"], "uploads/galleries_v/images/$folderName/",350,216, $file_name);
-            $image_851x606 = upload_picture($_FILES["file"]["tmp_name"], "uploads/galleries_v/images/$folderName/",851,606, $file_name);
+            $image_252x156 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu/images/$folderName/",252,156, $file_name);
+            $image_350x216 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu/images/$folderName/",350,216, $file_name);
+            $image_851x606 = upload_picture($_FILES["file"]["tmp_name"], "uploads/$this->viewFolderu/images/$folderName/",851,606, $file_name);
 
             if($image_252x156 && $image_350x216 && $image_851x606){
 
@@ -509,7 +515,7 @@ class Galleries extends CI_Controller
         } else {
 
             $config["allowed_types"] = "*";
-            $config["upload_path"]   = "uploads/galleries_v/files/$folderName/";
+            $config["upload_path"]   = "uploads/$this->viewFolderu/files/$folderName/";
             $config["file_name"]     = $file_name;
 
             $this->load->library("upload", $config);
@@ -585,7 +591,7 @@ class Galleries extends CI_Controller
             )
         );
 
-        $delete_path   = ($gallery_type == "image") ? "./uploads/galleries_v/images/$folderName->folder_name/" : "./uploads/galleries_v/files/$folderName->folder_name/";
+        $delete_path   = ($gallery_type == "image") ? "./uploads/$this->viewFolderu/images/$folderName->folder_name/" : "./uploads/$this->viewFolderu/files/$folderName->folder_name/";
 
         // TODO Alert Sistemi Eklenecek...
         if($delete){

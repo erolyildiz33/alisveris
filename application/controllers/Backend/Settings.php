@@ -10,12 +10,14 @@ class Settings extends CI_Controller
         parent::__construct();
 
         $this->viewFolder = "backend/settings_v";
+         $this->viewFolderu = "settings_v";
 
         $this->load->model("backend/settings_model");
 
         if (!get_active_user()) {
             redirect(base_url("login"));
         }
+         if(!is_dir("uploads/$this->viewFolderu")) mkdir("uploads/$this->viewFolderu", 0777, TRUE);
 
     }
 
@@ -126,11 +128,11 @@ class Settings extends CI_Controller
 
             // Upload Süreci...
 
-            $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
+            $file_name =  "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
 
-            $image_150x35 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/settings_v", 150, 35, $file_name);
-            $image_300x70 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/settings_v", 300, 70, $file_name);
-            $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/settings_v", 32, 32, $file_name);
+            $image_300x70 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/$this->viewFolderu", 300, 70, "logo".$file_name);
+            $image_150x35 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/$this->viewFolderu", 150, 35, "mobile_logo".$file_name);
+            $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/$this->viewFolderu", 32, 32, "favicon".$file_name);
 
             if ($image_150x35 && $image_300x70 && $image_32x32) {
 
@@ -150,9 +152,9 @@ class Settings extends CI_Controller
                         "twitter" => $this->input->post("twitter"),
                         "instagram" => $this->input->post("instagram"),
                         "linkedin" => $this->input->post("linkedin"),
-                        "logo" => $file_name,
-                        "mobile_logo" => $file_name,
-                        "favicon" => $file_name,
+                        "logo" =>  "logo".$file_name,
+                        "mobile_logo" => "mobile_logo".$file_name,
+                        "favicon" => "favicon".$file_name,
                         "createdAt" => date("Y-m-d H:i:s")
                     )
                 );
@@ -277,11 +279,11 @@ class Settings extends CI_Controller
             // Masaüstü Logosu için Upload Süreci...
             if ($_FILES["logo"]["name"] !== "") {
 
-                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
+                $file_name = "logo." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION);
 
-                $image_150x35 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/settings_v", 150, 35, "logo." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION));
+                $image_300x70 = upload_picture($_FILES["logo"]["tmp_name"], "uploads/$this->viewFolderu", 300, 70, "logo." . pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION));
 
-                if ($image_150x35) {
+                if ($image_300x70) {
 
                     $data["logo"] = $file_name;
 
@@ -306,11 +308,11 @@ class Settings extends CI_Controller
             // Mobil Logosu için Upload Süreci...
             if ($_FILES["mobile_logo"]["name"] !== "") {
 
-                $file_name = md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION);
+                $file_name = "mobile_logo." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION);
 
-                $image_300x70 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/settings_v", 300, 70,"mobile_logo." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION));
+                $image_150x35 = upload_picture($_FILES["mobile_logo"]["tmp_name"], "uploads/$this->viewFolderu", 150, 35,"mobile_logo." . pathinfo($_FILES["mobile_logo"]["name"], PATHINFO_EXTENSION));
 
-                if ($image_300x70) {
+                if ($image_150x35) {
 
                     $data["mobile_logo"] = $file_name;
 
@@ -335,9 +337,9 @@ class Settings extends CI_Controller
             // Favicon için Upload Süreci...
             if ($_FILES["favicon"]["name"] !== "") {
 
-                $file_name =  md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION);
+                $file_name =  "favicon." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION);
 
-                $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/settings_v", 32, 32,"favicon." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION));
+                $image_32x32 = upload_picture($_FILES["favicon"]["tmp_name"], "uploads/$this->viewFolderu", 32, 32,"favicon." . pathinfo($_FILES["favicon"]["name"], PATHINFO_EXTENSION));
 
                 if ($image_32x32) {
 

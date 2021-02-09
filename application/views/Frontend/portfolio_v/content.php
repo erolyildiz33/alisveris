@@ -13,6 +13,7 @@
 
                             <!-- slider revolution start -->
                             <!-- ================ -->
+
                             <div class="slider-revolution-5-container">
                                 <div id="slider-banner-boxedwidth" class="slider-banner-boxedwidth rev_slider" data-version="5.0">
                                     <ul class="slides">
@@ -23,7 +24,7 @@
                                             <li class="text-center" data-transition="slidehorizontal" data-slotamount="default" data-masterspeed="default" data-title="<?php echo $portfolio->title; ?>">
 
                                                 <!-- main image -->
-                                                <img src="<?php echo get_picture("frontend/portfolio_v", $image->img_url, "1080x426"); ?>" alt="<?php echo $portfolio->title; ?>" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
+                                                <img src="<?php echo get_picture($viewFolderu, $image->img_url, "1080x426"); ?>" alt="<?php echo $portfolio->title; ?>" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                                                 <!-- Transparent Background -->
                                                 <div class="tp-caption dark-translucent-bg"
@@ -79,7 +80,7 @@
                                             <li><strong>Tarih: </strong> <span class="text-right"><?php echo get_readable_date($portfolio->finishedAt); ?></span></li>
                                             <li><strong>Kategori: </strong> <span class="text-right"><?php echo get_portfolio_category_title($portfolio->category_id); ?></span></li>
                                             <li><strong>Place: </strong> <span class="text-right"><?php echo $portfolio->place; ?></span></li>
-                                            <li><strong>URL: </strong> <span class="text-right"><a href="<?php echo $portfolio->portfolio_url; ?>"><?php echo $portfolio->portfolio_url; ?></a></span></li>
+                                            <li><strong>URL: </strong> <span class="text-right"><a target="_blank" href="<?php echo $portfolio->portfolio_url; ?>"><?php echo $portfolio->portfolio_url; ?></a></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -114,7 +115,7 @@
                                         </div>
                                         <div class="body">
                                             <p><?php echo character_limiter(strip_tags($portfolio->description), 30); ?></p>
-                                            <a href="<?php echo base_url("frontend/portfolyo-detay/$portfolio->url"); ?>" class="btn btn-default btn-sm btn-hvr hvr-sweep-to-right margin-clear">Görüntüle<i class="fa fa-arrow-right pl-10"></i></a>
+                                            <a href="<?php echo base_url("portfolyo-detay/$portfolio->url"); ?>" class="btn btn-default btn-sm btn-hvr hvr-sweep-to-right margin-clear">Görüntüle<i class="fa fa-arrow-right pl-10"></i></a>
                                         </div>
                                     </div>
                                 </div>

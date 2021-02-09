@@ -29,7 +29,7 @@
                         <div id="logo" class="logo">
                             <a href="<?php echo base_url(); ?>">
                                 <img id="logo_img"
-                                     src="<?php echo get_picture("settings_v", $settings->logo, "250x100"); ?>"
+                                     src="<?php echo get_picture("settings_v", $settings->logo, "300x70"); ?>"
                                      alt="<?php echo $settings->company_name; ?>">
                             </a>
                         </div>

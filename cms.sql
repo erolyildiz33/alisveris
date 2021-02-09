@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0-rc1
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 24 Oca 2021, 23:08:43
--- Sunucu sürümü: 5.7.31-log
--- PHP Sürümü: 7.4.12
+-- Üretim Zamanı: 09 Şub 2021, 12:13:47
+-- Sunucu sürümü: 5.7.27-log
+-- PHP Sürümü: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -333,7 +333,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `company_name`, `slogan`, `address`, `about_us`, `mission`, `vision`, `logo`, `mobile_logo`, `favicon`, `homepage_references_description`, `phone_1`, `phone_2`, `fax_1`, `fax_2`, `email`, `facebook`, `twitter`, `instagram`, `linkedin`, `lat`, `long`, `createdAt`, `updatedAt`) VALUES
-(5, 'Temsil-1', NULL, '                                                                                                                                                        ', '                                                                                                                                                        ', '                                                                                                                                                        ', '                                                                                                                                                        ', 'temsil-1.jpg', 'temsil-1.jpg', 'temsil-1.jpg', NULL, '5555555555', '', '', '', 'a@aaa.com', '', '', '', '', NULL, NULL, '2020-12-27 19:39:31', '2021-01-24 22:20:25');
+(5, 'Temsil-1', NULL, '                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ', '                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ', '                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ', '                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ', 'logo.jpg', 'mobile_logo.jpg', 'favicon.jpg', NULL, '5555555555', '', '', '', 'a@aaa.com', '', '', '', '', NULL, NULL, '2020-12-27 19:39:31', '2021-02-09 12:07:46');
 
 -- --------------------------------------------------------
 
@@ -598,7 +598,7 @@ ALTER TABLE `email_settings`
 -- Tablo için AUTO_INCREMENT değeri `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `galleries`
@@ -652,7 +652,7 @@ ALTER TABLE `portfolio_images`
 -- Tablo için AUTO_INCREMENT değeri `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `product_images`
@@ -682,7 +682,7 @@ ALTER TABLE `settings`
 -- Tablo için AUTO_INCREMENT değeri `slides`
 --
 ALTER TABLE `slides`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `testimonials`

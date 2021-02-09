@@ -144,6 +144,7 @@ class Home extends CI_Controller {
 
         $viewData = new stdClass();
         $viewData->viewFolder = "frontend/portfolio_v";
+         $viewData->viewFolderu = "portfolio_v";
 
         $this->load->model("frontend/portfolio_model");
         $this->load->model("frontend/portfolio_image_model");

@@ -16,16 +16,16 @@ class Dashboard extends CI_Controller {
         if(!get_active_user()){
             redirect(base_url("login"));
         }
-
+        
     }
 
     public function index()
-	{
+    {
 
-	    $viewData = new stdClass();
-        $viewData->viewFolder = $this->viewFolder;
-        $viewData->subViewFolder = "list";
+       $viewData = new stdClass();
+       $viewData->viewFolder = $this->viewFolder;
+       $viewData->subViewFolder = "list";
 
-		$this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
-	}
+       $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+   }
 }

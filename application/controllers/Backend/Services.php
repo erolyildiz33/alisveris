@@ -17,7 +17,7 @@ class Services extends CI_Controller
         if (!get_active_user()) {
             redirect(base_url("login"));
         }
-
+ if(!is_dir("uploads/$this->viewFolderu")) mkdir("uploads/$this->viewFolderu", 0777, TRUE);
     }
 
     public function index()
@@ -210,8 +210,8 @@ class Services extends CI_Controller
 
                 $file_name = md5(date_timestamp_get(date_create()).Rand()) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
-                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder", 555, 343, $file_name);
-                $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolder", 350, 217, $file_name);
+                $image_555x343 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu", 555, 343, $file_name);
+                $image_350x217 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/$this->viewFolderu", 350, 217, $file_name);
 
                 if ($image_555x343 && $image_350x217) {
 

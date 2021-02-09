@@ -12,7 +12,7 @@
 
                     <?php if(!empty($images)) { ?>
 
-                        <?php foreach ($images as $image) { ?>
+                        <?php  foreach ($images as $image) { ?>
 
                             <div class="col-3 mb-20">
                                 <div class="overlay-container">

@@ -18,7 +18,7 @@ class Testimonials extends CI_Controller
         if(!get_active_user()){
             redirect(base_url("login"));
         }
-
+       if(!is_dir("uploads/$this->viewFolderu")) mkdir("uploads/$this->viewFolderu", 0777, TRUE);
     }
 
     public function index(){
