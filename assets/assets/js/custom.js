@@ -244,9 +244,6 @@ $(document).ready(function () {
         '</td> </tr>';
 
     }));
-
-
-
     $("#altliste").attr('status',"true");
     $("#altliste").attr('addid',altid);
     var content='<div class="row">'+
@@ -269,7 +266,6 @@ $(document).ready(function () {
     '<tbody class="sortablealt" data-url="'+geturl+'rankSetter">'+alticerikliste+
     '</tbody></table>'+
     '</div></div></div>';
-
     $("#altliste").html(content);
     var elems = document.querySelectorAll('.altactive');
     for (var i = 0; i < elems.length; i++) {       
