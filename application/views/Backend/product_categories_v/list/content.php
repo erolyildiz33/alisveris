@@ -56,7 +56,7 @@
                                         <i class="fa fa-plus"></i> Alt Kategori Ekle
                                     </a>
                                     <?php if (get_sub_category_title($item->id)) { ?>
-                                        <button data-altid="<?=$item->id?>" style="margin-left: 10px;float: left;"
+                                        <button data-altid="<?=$item->id?>" data-getustid="0" style="margin-left: 10px;float: left;"
                                            data-title="<?=$item->title?>"
                                            data-geturl='<?php echo base_url("backend/product_categories/"); ?>'
                                            class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">
