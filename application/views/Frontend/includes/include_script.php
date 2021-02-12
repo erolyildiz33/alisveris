@@ -37,6 +37,8 @@
 <script type="text/javascript" src="<?php echo base_url("assets"); ?>/plugins/pace/pace.min.js"></script>
 <!-- Initialization of Plugins -->
 <script type="text/javascript" src="<?php echo base_url("assets"); ?>/js/template.js"></script>
+
+<script type="text/javascript" src="<?php echo base_url("assets"); ?>/libs/bower/dropzone/dist/min/dropzone.min.js"></script>
 <!-- Custom Scripts -->
 <script type="text/javascript" src="<?php echo base_url("assets"); ?>/js/custom.js"></script>
 

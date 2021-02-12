@@ -1,3 +1,5 @@
+
+
 AjaxGet = function (url) {
     var result = $.ajax({
         type: "get",
@@ -83,7 +85,7 @@ $(document).on('click', '.alt-container .remove-btn,.content-container .remove-b
                             jackColor: jackColor
                         });
                     });
-                    uploadSection.removeAllFiles();
+                   
 
                     $(".sortable").sortable();
                     iziToast.success({
@@ -126,215 +128,223 @@ $(document).on('change', '.alt-container .isActive,.content-container .isActive,
 
 })
 
+$(document).on("load",function(){
+
+})
+
+
 
 $(document).ready(function () {
 
 
- $(".altekle").click(function() {
-    var altid=$(this).data("altid");
-    var title=$(this).data("title");
-    var url=$(this).data("url");
-    var durum=$("#altekle").attr('status');
-    var sonid=$("#altekle").attr('addid');
-    if (durum=="true" && altid==sonid){ 
-        $("#altekle").html("");
-        $("#altekle").attr("status","false");
-        $("#altekle").removeAttr('addid')
-    }else if (durum=="true" && altid!=sonid){
-       $("#altekle").attr('addid',altid);
-       $("#altekle").attr('status',"true");
-       var ekle='<div class="row">'+
-       '<div class="col-md-12">'+
-       '<h4 class="m-b-lg">'+
-       '<b>'+title+'</b> Kategorisine Alt Kategorisi Ekle'+
-       '</h4>'+
-       '</div>'+
-       '<div class="col-md-12">'+
-       '<div class="widget">'+
-       '<div class="widget-body">'+
-       '<form action="'+url+'" method="post">'+  
-       '<input type="hidden" name="csrf_test_name" value="'+$("#csrf_test_name").data("csrf")+'">'+   
-       '<input type="hidden" name="anamenu" value="'+altid+'">'+
-       '<div class="form-group">'+
-       '<label>Başlık</label>'+
-       '<input class="form-control" placeholder="Başlık" name="title">'+
-       '</div>'+
-       '<button type="submit" class="btn btn-primary btn-md btn-outline add_sub_category">Kaydet</button>'+
-       '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>'+
-       '</form>'+
-       '</div>'+
-       '</div>'+
-       '</div>'+
-       '</div>';
-       $("#altekle").html(ekle);
-       sonid="";
-   }
-   else{
-    $("#altekle").attr('status',"true");
-    $("#altekle").attr('addid',altid);
-    var ekle='<div class="row">'+
-    '<div class="col-md-12">'+
-    '<h4 class="m-b-lg">'+
-    '<b>'+title+'</b> Kategorisine Alt Kategorisi Ekle'+
-    '</h4>'+
-    '</div>'+
-    '<div class="col-md-12">'+
-    '<div class="widget">'+
-    '<div class="widget-body">'+
-    '<form action="'+url+'" method="post">'+
-    '<input type="hidden" name="csrf_test_name" value="'+$("#csrf_test_name").data("csrf")+'">'+           
-    '<input type="hidden" name="anamenu" value="'+altid+'">'+
-    '<div class="form-group">'+
-    '<label>Başlık</label>'+
-    '<input class="form-control" placeholder="Başlık" name="title">'+
-    '</div>'+
-    '<button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>'+
-    '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>'+
-    '</form>'+
-    '</div>'+
-    '</div>'+
-    '</div>'+
-    '</div>';
-    $("#altekle").html(ekle);
-    sonid="";
-}
+
+
+    $(".altekle").click(function() {
+        var altid=$(this).data("altid");
+        var title=$(this).data("title");
+        var url=$(this).data("url");
+        var durum=$("#altekle").attr('status');
+        var sonid=$("#altekle").attr('addid');
+        if (durum=="true" && altid==sonid){ 
+            $("#altekle").html("");
+            $("#altekle").attr("status","false");
+            $("#altekle").removeAttr('addid')
+        }else if (durum=="true" && altid!=sonid){
+           $("#altekle").attr('addid',altid);
+           $("#altekle").attr('status',"true");
+           var ekle='<div class="row">'+
+           '<div class="col-md-12">'+
+           '<h4 class="m-b-lg">'+
+           '<b>'+title+'</b> Kategorisine Alt Kategorisi Ekle'+
+           '</h4>'+
+           '</div>'+
+           '<div class="col-md-12">'+
+           '<div class="widget">'+
+           '<div class="widget-body">'+
+           '<form action="'+url+'" method="post">'+  
+           '<input type="hidden" name="csrf_test_name" value="'+$("#csrf_test_name").data("csrf")+'">'+   
+           '<input type="hidden" name="anamenu" value="'+altid+'">'+
+           '<div class="form-group">'+
+           '<label>Başlık</label>'+
+           '<input class="form-control" placeholder="Başlık" name="title">'+
+           '</div>'+
+           '<button type="submit" class="btn btn-primary btn-md btn-outline add_sub_category">Kaydet</button>'+
+           '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>'+
+           '</form>'+
+           '</div>'+
+           '</div>'+
+           '</div>'+
+           '</div>';
+           $("#altekle").html(ekle);
+           sonid="";
+       }
+       else{
+        $("#altekle").attr('status',"true");
+        $("#altekle").attr('addid',altid);
+        var ekle='<div class="row">'+
+        '<div class="col-md-12">'+
+        '<h4 class="m-b-lg">'+
+        '<b>'+title+'</b> Kategorisine Alt Kategorisi Ekle'+
+        '</h4>'+
+        '</div>'+
+        '<div class="col-md-12">'+
+        '<div class="widget">'+
+        '<div class="widget-body">'+
+        '<form action="'+url+'" method="post">'+
+        '<input type="hidden" name="csrf_test_name" value="'+$("#csrf_test_name").data("csrf")+'">'+           
+        '<input type="hidden" name="anamenu" value="'+altid+'">'+
+        '<div class="form-group">'+
+        '<label>Başlık</label>'+
+        '<input class="form-control" placeholder="Başlık" name="title">'+
+        '</div>'+
+        '<button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>'+
+        '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>'+
+        '</form>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+        '</div>';
+        $("#altekle").html(ekle);
+        sonid="";
+    }
 });
- $(".altgetir").click(function(){
-    var alticerikliste="";
-    var altid=$(this).data("altid");
-    var title=$(this).data("title");
-    var geturl=$(this).data("geturl");
-    var durum=$("#altliste").attr('status');
-    var sonid=$("#altliste").attr('addid');
-    altmenuler=$.parseJSON(AjaxGet(geturl+"getaltkategori/"+altid));
-    var say=1;
-    $.each(altmenuler,(function(index,element){
-        checked=(element.isActive==1)?"checked" : " ";
-        mylist=(AjaxGet(geturl+"getaltkategori/"+element.id)) ?
-        '<button data-altid="'+element.id+'"style="margin-left: 10px;float: left;"'+
-        'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">'+
-        '<i class="fa fa-cog"></i> Alt Kategori İşlemleri'+
-        '</button>'
-        :" ";
-        alticerikliste+='<tr id="ord-'+element.id+'">'+
-        '<td class="order"><i class="fa fa-reorder"></i></td>'+
-        '<td class="w50 text-center siranoalt">'+say++ +'</td>'+
-        '<td>'+element.title +'</td>'+
-        '<td class="text-center w100">'+
-        '<input data-url="'+geturl+'isActiveSetter/'+element.id+'"'+
-        'class="isActive altactive" type="checkbox" data-switchery data-color="#10c469" '+ checked +' /></td>'+
-        '<td class="w400 text-center">'+
-        '<div class="text-center" style="margin-left: 30px;">'+
-        '<a data-altid="'+element.id+'" data-title="'+element.title+'"'+
-        'data-url="'+geturl+"save_sub"+'"'+
-        'style="float: left;"'+
-        'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">'+
-        '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>'+
-        mylist +
-        ' </div>'+
-        '</td>'+
-        '<td class="text-center w300" >'+
-        '<button '+
-        'data-url="'+geturl+'delete/'+element.id+'"'+
-        ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">'+
-        '<i class="fa fa-trash"></i> Sil '+
-        '</button>'+
-        ' <a href="'+geturl+'update_form/'+element.id+'"'+
-        'class="btn btn-sm btn-info btn-outline" style="margin-left: 10px;"><i class="fa fa-pencil-square-o"></i> Düzenle</a>'+
-        '</td> </tr>';
+    $(".altgetir").click(function(){
+        var alticerikliste="";
+        var altid=$(this).data("altid");
+        var title=$(this).data("title");
+        var geturl=$(this).data("geturl");
+        var durum=$("#altliste").attr('status');
+        var sonid=$("#altliste").attr('addid');
+        altmenuler=$.parseJSON(AjaxGet(geturl+"getaltkategori/"+altid));
+        var say=1;
+        $.each(altmenuler,(function(index,element){
+            checked=(element.isActive==1)?"checked" : " ";
+            mylist=(AjaxGet(geturl+"getaltkategori/"+element.id)) ?
+            '<button data-altid="'+element.id+'"style="margin-left: 10px;float: left;"'+
+            'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">'+
+            '<i class="fa fa-cog"></i> Alt Kategori İşlemleri'+
+            '</button>'
+            :" ";
+            alticerikliste+='<tr id="ord-'+element.id+'">'+
+            '<td class="order"><i class="fa fa-reorder"></i></td>'+
+            '<td class="w50 text-center siranoalt">'+say++ +'</td>'+
+            '<td>'+element.title +'</td>'+
+            '<td class="text-center w100">'+
+            '<input data-url="'+geturl+'isActiveSetter/'+element.id+'"'+
+            'class="isActive altactive" type="checkbox" data-switchery data-color="#10c469" '+ checked +' /></td>'+
+            '<td class="w400 text-center">'+
+            '<div class="text-center" style="margin-left: 30px;">'+
+            '<a data-altid="'+element.id+'" data-title="'+element.title+'"'+
+            'data-url="'+geturl+"save_sub"+'"'+
+            'style="float: left;"'+
+            'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">'+
+            '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>'+
+            mylist +
+            ' </div>'+
+            '</td>'+
+            '<td class="text-center w300" >'+
+            '<button '+
+            'data-url="'+geturl+'delete/'+element.id+'"'+
+            ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">'+
+            '<i class="fa fa-trash"></i> Sil '+
+            '</button>'+
+            ' <a href="'+geturl+'update_form/'+element.id+'"'+
+            'class="btn btn-sm btn-info btn-outline" style="margin-left: 10px;"><i class="fa fa-pencil-square-o"></i> Düzenle</a>'+
+            '</td> </tr>';
 
-    }));
-    $("#altliste").attr('status',"true");
-    $("#altliste").attr('addid',altid);
-    var content='<div class="row">'+
-    '<div class="col-md-12">'+
-    '<h4 class="m-b-lg">'+
-    '<b>'+title+'</b> Kategorisi Alt Kategorileri Listesi'+       
-    '</h4>'+
-    '</div>'+
-    ' <div class="col-md-12">'+
-    '<div class="widget p-lg">'+
-    '<table class="table table-hover table-striped table-bordered alt-container">'+
-    '<thead>'+
-    '<th class="order"><i class="fa fa-reorder"></i></th>'+
-    '<th class="w50">Sıra</th>'+
-    '<th>Başlık</th>'+
-    '<th>Durumu</th>'+
-    '<th>Alt Kategori</th>'+
-    '<th>İşlem</th>'+
-    '</thead>'+
-    '<tbody class="sortablealt" data-url="'+geturl+'rankSetter">'+alticerikliste+
-    '</tbody></table>'+
-    '</div></div></div>';
-    $("#altliste").html(content);
-    var elems = document.querySelectorAll('.altactive');
-    for (var i = 0; i < elems.length; i++) {       
-        var switchery = new Switchery(elems[i]);
-    };
-    var elemsSort = document.querySelectorAll('.sortablealt');
-    $.each(elemsSort,function(){
-        $(this).sortable();
-    })
-});
-
-
+        }));
+        $("#altliste").attr('status',"true");
+        $("#altliste").attr('addid',altid);
+        var content='<div class="row">'+
+        '<div class="col-md-12">'+
+        '<h4 class="m-b-lg">'+
+        '<b>'+title+'</b> Kategorisi Alt Kategorileri Listesi'+       
+        '</h4>'+
+        '</div>'+
+        ' <div class="col-md-12">'+
+        '<div class="widget p-lg">'+
+        '<table class="table table-hover table-striped table-bordered alt-container">'+
+        '<thead>'+
+        '<th class="order"><i class="fa fa-reorder"></i></th>'+
+        '<th class="w50">Sıra</th>'+
+        '<th>Başlık</th>'+
+        '<th>Durumu</th>'+
+        '<th>Alt Kategori</th>'+
+        '<th>İşlem</th>'+
+        '</thead>'+
+        '<tbody class="sortablealt" data-url="'+geturl+'rankSetter">'+alticerikliste+
+        '</tbody></table>'+
+        '</div></div></div>';
+        $("#altliste").html(content);
+        var elems = document.querySelectorAll('.altactive');
+        for (var i = 0; i < elems.length; i++) {       
+            var switchery = new Switchery(elems[i]);
+        };
+        var elemsSort = document.querySelectorAll('.sortablealt');
+        $.each(elemsSort,function(){
+            $(this).sortable();
+        })
+    });
 
 
- $(".image_list_container").on('change', '.isCover', function () {
 
-    var $data = $(this).prop("checked");
-    var $data_url = $(this).data("url");
 
-    if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
+    $(".image_list_container").on('change', '.isCover', function () {
 
-        $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
+        var $data = $(this).prop("checked");
+        var $data_url = $(this).data("url");
 
-            $(".image_list_container").html(response);
+        if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
 
-            $('[data-switchery]').each(function () {
-                var $this = $(this),
-                color = $this.attr('data-color') || '#188ae2',
-                jackColor = $this.attr('data-jackColor') || '#ffffff',
-                size = $this.attr('data-size') || 'default'
+            $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
 
-                new Switchery(this, {
-                    color: color,
-                    size: size,
-                    jackColor: jackColor
+                $(".image_list_container").html(response);
+
+                $('[data-switchery]').each(function () {
+                    var $this = $(this),
+                    color = $this.attr('data-color') || '#188ae2',
+                    jackColor = $this.attr('data-jackColor') || '#ffffff',
+                    size = $this.attr('data-size') || 'default'
+
+                    new Switchery(this, {
+                        color: color,
+                        size: size,
+                        jackColor: jackColor
+                    });
+                });
+
+                $(".sortable").sortable();
+                iziToast.success({
+                    title: 'Kapak Durumu Değiştirme',
+                    message: 'Başarılı',
+                    position: 'topRight',
+
                 });
             });
 
-            $(".sortable").sortable();
-            iziToast.success({
-                title: 'Kapak Durumu Değiştirme',
-                message: 'Başarılı',
-                position: 'topRight',
+        }
 
-            });
-        });
-
-    }
-
-})
+    })
 
 
 
 
- $(".button_usage_btn").change(function () {
+    $(".button_usage_btn").change(function () {
 
-    $(".button-information-container").slideToggle();
+        $(".button-information-container").slideToggle();
 
-})
+    })
 
- Dropzone.autoDiscover = false;
- var uploadSection = Dropzone.forElement("#dropzone");
- uploadSection.on("sending", function (file, xhr, formData) {
+if (document.getElementById("dropzone")){
+   var uploadSection = Dropzone.forElement("#dropzone");
+
+   uploadSection.on("sending", function (file, xhr, formData) {
 
 
     formData.append(csrf_test_name, csrf_value);
 
 });
- uploadSection.on("complete", function (file) {
+   uploadSection.on("complete", function (file) {
 
     var $data_url = $("#dropzone").data("url");
 
@@ -357,7 +367,11 @@ $(document).ready(function () {
                 jackColor: jackColor
             });
         });
-        uploadSection.removeAllFiles();
+       
+             
+             uploadSection.removeAllFiles();
+        
+       
 
         $(".sortable").sortable();
         iziToast.success({
@@ -370,5 +384,8 @@ $(document).ready(function () {
     });
 
 });
+
+}
+   
 
 })
