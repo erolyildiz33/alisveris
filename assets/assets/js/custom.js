@@ -202,7 +202,7 @@ $(document).on('click', '.altgetir', function () {
     '<th>Alt Kategori</th>'+
     '<th>İşlem</th>'+
     '</thead>'+
-    '<tbody class="sortablealt" data-url="'+geturl+'rankSetter">'+alticerikliste+
+    '<tbody class="sortablealt siralamayap'+altid+'" data-sorttableid="'+altid+'" data-url="'+geturl+'rankSetter">'+alticerikliste+
     '</tbody></table>'+
     '</div></div></div>'+
     '<div id="altliste'+altid+'" status="false">'+
