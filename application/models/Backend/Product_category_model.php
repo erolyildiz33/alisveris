@@ -82,4 +82,39 @@ class Product_category_model extends CI_Model
             echo "</li></ul>";
         }
     }
+     public function get_categories($ustmenuid=0){
+
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('ustmenu',$ustmenuid);
+
+        $parent = $this->db->get();
+        
+        $categories = $parent->result();
+        $i=0;
+        foreach($categories as $p_cat){
+
+            $categories[$i]->sub = $this->sub_categories($p_cat->id);
+            $i++;
+        }
+        return $categories;
+    }
+
+    public function sub_categories($id){
+
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('ustmenu', $id);
+
+        $child = $this->db->get();
+        $categories = $child->result();
+        $i=0;
+        foreach($categories as $p_cat){
+
+            $categories[$i]->sub = $this->sub_categories($p_cat->id);
+            $i++;
+        }
+        return $categories;       
+    }
+
 }

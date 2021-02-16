@@ -19,12 +19,18 @@
             <button type="submit" class="btn btn-primary btn-block">Kaydet</button>
         </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">Kategorileri Listelemek</div>
             <div class="card-body bg-light">
-                <?php $this->product_category_model->kategoriListesi(); ?>
-            </div>
-        </div>
-    </div>
+               <table   id="roottable"></table> 
+               <div id="dialogRemove"></div>
+
+
+               <?php $this->product_category_model->kategoriListesi(); ?>
+           </div>
+       </div>
+   </div>
 </div>
+
+
