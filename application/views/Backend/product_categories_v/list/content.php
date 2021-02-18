@@ -10,12 +10,27 @@
    <div class="col-md-8">
     <div class="row">
 
-      <div class="col-md-12">
+      <div class="col-md-8">
         <h4 class="m-b-lg">
           Ürün Kategori Listesi
 
         </h4>
-      </div><!-- END column -->
+
+      </div>
+
+        <div class="row" style="right:20px; ">
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Kategori Ara" id="txtSearch"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <div class="col-md-12">
         <div class="widget p-lg">
 

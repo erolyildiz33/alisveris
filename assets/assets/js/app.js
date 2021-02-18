@@ -416,7 +416,7 @@
                 var $trigger = $(e.target);
                 $trigger.is('[data-toggle="collapse"]') || ($trigger = $trigger.parents('[data-toggle="collapse"]'));
                 var $target = $($trigger.attr('data-target'));
-                if ($target.attr('id') === 'navbar-search') {
+                if ($target.attr('id') === 'navbar-search' && window.location.pathname.split("/").pop()!=="product_categories") {
                     if (!$trigger.hasClass('collapsed')) {
                         var $field = $target.find('input[type="search"]').focus();
                         document.querySelector($field.selector).setSelectionRange(0, $field.val().length);
