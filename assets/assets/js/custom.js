@@ -26,27 +26,35 @@ var csrf_test_name='csrf_test_name';
 $(".sortable").sortable();
 
 
-$(document).on('sortupdate', '.alt-container .sortablealt,.content-container .sortable, .image_list_container .sortable', function (event, ui)  {
+$(document).on('sortupdate', '.alt-container .sortable,.content-container .sortable, .image_list_container .sortable', function (event, ui)  {
 
     var $data = $(this).sortable("serialize");
     var $data_url = $(this).data("url");
+    var $data_sirano = $(this).data("sirano");
 
 
     $.post($data_url, {data: $data, csrf_test_name: csrf_value}, function (response) {
-
-        $('.sortablealt .siranoalt').each(function (i) {
+        if($data_sirano==0){
+            $('.sortable .sirano').each(function (i) {
             var humanNum = i + 1;
             $(this).html(humanNum + '');
-        });
-        iziToast.success({
-            title: 'Sıralama Değiştirme',
-            message: 'Başarılı',
-            position: 'topRight',
+        }); 
+       }else{
+           $('.sortable .sirano'+$data_sirano).each(function (i) {
+            var humanNum = i + 1;
+            $(this).html(humanNum + '');
+        }); 
+       }
 
-        });
+       iziToast.success({
+        title: 'Sıralama Değiştirme',
+        message: 'Başarılı',
+        position: 'topRight',
+
+    });
 
 
-    })
+   })
 
 })
 $(document).on('click', '.alt-container .remove-btn,.content-container .remove-btn, .image_list_container .remove-btn', function () {
@@ -152,13 +160,14 @@ $(document).on('click', '.altgetir', function () {
         '<button data-altid="'+element.id+'"style="margin-left: 10px;float: left;"'+
         'data-geturl="'+geturl+'"'+
         'data-getustid="'+altid+'"'+
+        'data-title="'+title+'"'+
         'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">'+
         '<i class="fa fa-cog"></i> Alt Kategori İşlemleri'+
         '</button>'
         :" ";
         alticerikliste+='<tr id="ord-'+element.id+'">'+
         '<td class="order"><i class="fa fa-reorder"></i></td>'+
-        '<td class="w50 text-center siranoalt">'+say++ +'</td>'+
+        '<td class="w50 text-center sirano'+altid+'">'+say++ +'</td>'+
         '<td>'+element.title +'</td>'+
         '<td class="text-center w100">'+
         '<input data-url="'+geturl+'isActiveSetter/'+element.id+'"'+
@@ -202,7 +211,7 @@ $(document).on('click', '.altgetir', function () {
     '<th>Alt Kategori</th>'+
     '<th>İşlem</th>'+
     '</thead>'+
-    '<tbody class="sortablealt siralamayap'+altid+'" data-sorttableid="'+altid+'" data-url="'+geturl+'rankSetter">'+alticerikliste+
+    '<tbody class="sortable" data-sirano="'+altid+'" data-sorttableid="'+altid+'" data-url="'+geturl+'rankSetter">'+alticerikliste+
     '</tbody></table>'+
     '</div></div></div>'+
     '<div id="altliste'+altid+'" status="false">'+
@@ -227,7 +236,7 @@ var elems = document.querySelectorAll('.altactive'+altid);
 for (var i = 0; i < elems.length; i++) {       
     var switchery = Switchery(elems[i]);
 };
-var elemsSort = document.querySelectorAll('.sortablealt');
+var elemsSort = document.querySelectorAll('.sortable');
 $.each(elemsSort,function(){
     $(this).sortable();
 })

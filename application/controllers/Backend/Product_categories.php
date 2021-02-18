@@ -41,7 +41,14 @@ class product_categories extends CI_Controller
     }
 
 
+    public function getAltKategori($ustmenuid=null){
+        $result=$this->product_category_model->get_all(
+            array("ustmenu"=>$ustmenuid), "rank ASC"
+        );
+        if($result)
+            echo json_encode($result);
 
+    }
   public function tumkategori($ustmenu = 0) {
 
 
