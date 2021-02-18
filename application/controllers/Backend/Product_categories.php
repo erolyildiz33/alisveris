@@ -106,7 +106,7 @@ class product_categories extends CI_Controller
 
         if($validate){
             $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",0)->limit(1)->order_by("rank","desc")->get()->row();
-       
+
             // Upload Süreci...
             $insert = $this->product_category_model->add(
                 array(
@@ -158,52 +158,59 @@ class product_categories extends CI_Controller
 
     public function save_sub(){
         if (!strlen(trim($this->input->post('title')))>0){
-           $alert = array(
+         $alert = array(
             "title" => "İşlem Başarısız",
             "text" => "<b> Başlık </b> alanı doldurulmalıdır",
             "type"  => "error"
         );
-           $this->session->set_flashdata("alert", $alert);
+         $this->session->set_flashdata("alert", $alert);
 
-           redirect(base_url("backend/product_categories"));
+         redirect(base_url("backend/product_categories"));
 
 
-       }
-       else{
-        $insert = $this->product_category_model->add(
-            array(
-                "title"         => $this->input->post("title"),
-                "isActive"      => 1,
-                "createdAt"     => date("Y-m-d H:i:s"),
-                "ustmenu" =>$this->input->post("anamenu"),
-            )
-        );
+     }
+     else{
+
+       $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",$this->input->post("anamenu"))->limit(1)->order_by("rank","desc")->get()->row();
+       
+
+
+
+       $insert = $this->product_category_model->add(
+        array(
+            "title"         => $this->input->post("title"),
+            "isActive"      => 1,
+            "createdAt"     => date("Y-m-d H:i:s"),
+            "ustmenu" =>$this->input->post("anamenu"),
+            "rank"          =>(($rank)?$rank->rank+1:0),
+        )
+    );
 
             // TODO Alert sistemi eklenecek...
-        if($insert){
+       if($insert){
 
-            $alert = array(
-                "title" => "İşlem Başarılı",
-                "text" => "Kayıt başarılı bir şekilde eklendi",
-                "type"  => "success"
-            );
+        $alert = array(
+            "title" => "İşlem Başarılı",
+            "text" => "Kayıt başarılı bir şekilde eklendi",
+            "type"  => "success"
+        );
 
-        } else {
+    } else {
 
-            $alert = array(
-                "title" => "İşlem Başarısız",
-                "text" => "Kayıt Ekleme sırasında bir problem oluştu",
-                "type"  => "error"
-            );
-        }
+        $alert = array(
+            "title" => "İşlem Başarısız",
+            "text" => "Kayıt Ekleme sırasında bir problem oluştu",
+            "type"  => "error"
+        );
+    }
 
             // İşlemin Sonucunu Session'a yazma işlemi...
-        $this->session->set_flashdata("alert", $alert);
+    $this->session->set_flashdata("alert", $alert);
 
-        redirect(base_url("backend/product_categories"));
+    redirect(base_url("backend/product_categories"));
 
 
-    }
+}
 }
 
 public function update_form($id){
