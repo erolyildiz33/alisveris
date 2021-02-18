@@ -1,6 +1,12 @@
 <div class="row">
-  <a href="<?php echo base_url("backend/product_categories/new_form"); ?>"
-   class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
+
+  <a data-altid="0"
+    data-url='<?php echo base_url("backend/product_categories/save"); ?>'
+    class="btn btn-outline btn-primary btn-xs pull-right yeniekle" data-analiste="evet">
+    <i class="fa fa-plus"></i>  Yeni Ekle
+  </a>
+
+
    <div class="col-md-8">
     <div class="row">
 
@@ -85,25 +91,25 @@
 
 
 
-                
-                 </td>
-               </tr>
 
-             <?php } ?>
+               </td>
+             </tr>
 
-           </tbody>
+           <?php } ?>
 
-         </table>
+         </tbody>
 
-       <?php } ?>
+       </table>
 
-     </div><!-- .widget -->
-   </div><!-- END column -->
- </div>
+     <?php } ?>
 
- <div id="altliste" status="false">
+   </div><!-- .widget -->
+ </div><!-- END column -->
+</div>
 
- </div>
+<div id="altliste" status="false">
+
+</div>
 </div>
 <div class="col-md-4">
   <div id="altekle" status="false">

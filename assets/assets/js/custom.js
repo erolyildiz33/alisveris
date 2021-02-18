@@ -15,18 +15,11 @@ AjaxGet = function (url) {
     return  result;
 }
 $(document).on("click", ".iptalaltekle" , function() {
-   $("#altekle").html("");
-   $("#altekle").attr("status","false");
-   $("#altekle").removeAttr('addid');
+ $("#altekle").html("");
+ $("#altekle").attr("status","false");
+ $("#altekle").removeAttr('addid');
 
 });
-
-
-
-
-
-
-
 $(document).on('click', '.altguncelle', function () {
     var altid=$(this).data("altid");
     var title=$(this).data("title");
@@ -54,20 +47,20 @@ $(document).on('click', '.altguncelle', function () {
     '</form></div></div></div></div>';
 
     if (durum=="true" && altid==sonid){ 
-       ekle="";
-       $("#altekle").attr("status","false");
-       $("#altekle").removeAttr('addid')
-   }else if (durum=="true" && altid!=sonid){
-     $("#altekle").attr('addid',altid);
-     $("#altekle").attr('status',"true");
- }else{
-     $("#altekle").attr('status',"true");
-     $("#altekle").attr('addid',altid);
- }
+     ekle="";
+     $("#altekle").attr("status","false");
+     $("#altekle").removeAttr('addid')
+ }else if (durum=="true" && altid!=sonid){
+   $("#altekle").attr('addid',altid);
+   $("#altekle").attr('status',"true");
+}else{
+   $("#altekle").attr('status',"true");
+   $("#altekle").attr('addid',altid);
+}
 
 
- $("#altekle").html(ekle);
- sonid="";
+$("#altekle").html(ekle);
+sonid="";
 
 });
 var csrf_value = $("#csrf_test_name").data("csrf");
@@ -89,13 +82,13 @@ $(document).on('sortupdate', '.alt-container .sortable,.content-container .sorta
                 $(this).html(humanNum + '');
             }); 
         }else{
-         $('.sortable .sirano'+$data_sirano).each(function (i) {
+           $('.sortable .sirano'+$data_sirano).each(function (i) {
             var humanNum = i + 1;
             $(this).html(humanNum + '');
         }); 
-     }
+       }
 
-     iziToast.success({
+       iziToast.success({
         title: 'Sıralama Değiştirme',
         message: 'Başarılı',
         position: 'topRight',
@@ -103,7 +96,7 @@ $(document).on('sortupdate', '.alt-container .sortable,.content-container .sorta
     });
 
 
- })
+   })
 
 })
 $(document).on('click', '.alt-container .remove-btn,.content-container .remove-btn, .image_list_container .remove-btn', function () {
@@ -195,7 +188,6 @@ $(document).on('click', '.altgetir', function () {
     }else{
         myid="#altliste";
     }
-    
     var title=$(this).data("title");
     var geturl=$(this).data("geturl");
     var getustid=$(this).data("getustid");
@@ -243,10 +235,7 @@ $(document).on('click', '.altgetir', function () {
         'data-url="'+geturl+'update/'+element.id+'"'+
         'class="btn btn-sm btn-info btn-outline altguncelle" data-analiste="evet">'+
         '<i class="fa fa-pencil-square-o"></i> Düzenle'+
-        '</button>'+
-
-
-        '</td> </tr>';
+        '</button></td> </tr>';
 
     }));
     var content='<div class="row">'+
@@ -273,16 +262,16 @@ $(document).on('click', '.altgetir', function () {
     '</div>';
 
     if (durum=="true" && altid==sonid){ 
-       content="";
-       $(myid).attr("status","false");
-       $(myid).removeAttr('addid')
-   }else if (durum=="true" && altid!=sonid){
-     $(myid).attr('addid',altid);
-     $(myid).attr('status',"true");
- }else{
-     $(myid).attr('status',"true");
-     $(myid).attr('addid',altid);
- }
+     content="";
+     $(myid).attr("status","false");
+     $(myid).removeAttr('addid')
+ }else if (durum=="true" && altid!=sonid){
+   $(myid).attr('addid',altid);
+   $(myid).attr('status',"true");
+}else{
+   $(myid).attr('status',"true");
+   $(myid).attr('addid',altid);
+}
 
 //"#altliste"+getustid
 
@@ -329,34 +318,71 @@ $(document).on('click', '.altekle', function () {
 
 
     if (durum=="true" && altid==sonid){ 
-       ekle="";
-       $("#altekle").attr("status","false");
-       $("#altekle").removeAttr('addid')
-   }else if (durum=="true" && altid!=sonid){
-     $("#altekle").attr('addid',altid);
-     $("#altekle").attr('status',"true");
- }else{
-     $("#altekle").attr('status',"true");
-     $("#altekle").attr('addid',altid);
- }
+     ekle="";
+     $("#altekle").attr("status","false");
+     $("#altekle").removeAttr('addid')
+ }else if (durum=="true" && altid!=sonid){
+   $("#altekle").attr('addid',altid);
+   $("#altekle").attr('status',"true");
+}else{
+   $("#altekle").attr('status',"true");
+   $("#altekle").attr('addid',altid);
+}
 
 
- $("#altekle").html(ekle);
- sonid="";
+$("#altekle").html(ekle);
+sonid="";
 
 });
 
+$(document).on('click', '.yeniekle', function () {
+   var altid=$(this).data("altid");
+   var url=$(this).data("url");
+   var durum=$("#altekle").attr('status');
+   var sonid=$("#altekle").attr('addid');
+   var ekle='<div class="row">'+
+   '<div class="col-md-12">'+
+   '<h4 class="m-b-lg">'+
+   '<b>Yeni</b> Kategori Ekle'+
+   '</h4>'+
+   '</div>'+
+   '<div class="col-md-12">'+
+   '<div class="widget">'+
+   '<div class="widget-body">'+
+   '<form action="'+url+'" method="post">'+  
+   '<input type="hidden" name="csrf_test_name" value="'+$("#csrf_test_name").data("csrf")+'">'+   
+   '<div class="form-group">'+
+   '<label>Başlık</label>'+
+   '<input class="form-control" placeholder="Başlık" name="title">'+
+   '</div>'+
+   '<button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>'+
+   '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>'+
+   '</form>'+
+   '</div>'+
+   '</div>'+
+   '</div>'+
+   '</div>';
 
+
+   if (durum=="true" && altid==sonid){ 
+     ekle="";
+     $("#altekle").attr("status","false");
+     $("#altekle").removeAttr('addid')
+ }else if (durum=="true" && altid!=sonid){
+   $("#altekle").attr('addid',altid);
+   $("#altekle").attr('status',"true");
+}else{
+   $("#altekle").attr('status',"true");
+   $("#altekle").attr('addid',altid);
+}
+
+
+$("#altekle").html(ekle);
+sonid="";
+
+});
 
 $(document).ready(function () {
-
-
-
-
-
-
-
-
     $(".image_list_container").on('change', '.isCover', function () {
 
         var $data = $(this).prop("checked");
@@ -404,15 +430,15 @@ $(document).ready(function () {
     })
 
     if (document.getElementById("dropzone")){
-       var uploadSection = Dropzone.forElement("#dropzone");
+     var uploadSection = Dropzone.forElement("#dropzone");
 
-       uploadSection.on("sending", function (file, xhr, formData) {
+     uploadSection.on("sending", function (file, xhr, formData) {
 
 
         formData.append(csrf_test_name, csrf_value);
 
     });
-       uploadSection.on("complete", function (file) {
+     uploadSection.on("complete", function (file) {
 
         var $data_url = $("#dropzone").data("url");
 
@@ -453,7 +479,7 @@ $(document).ready(function () {
 
     });
 
-   }
+ }
 
 
 })
