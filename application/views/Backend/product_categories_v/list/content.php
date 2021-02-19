@@ -47,6 +47,7 @@
                 <thead>
                  <th class="order"><i class="fa fa-reorder"></i></th>
                  <th class="w50">Sıra</th>
+                 <th>Üst Kategori</th>
                  <th>Başlık</th>
                  <th>Durumu</th>
                  <th>Alt Kategori</th>
@@ -59,6 +60,7 @@
                  <tr id="ord-<?php echo $item->id; ?>">
                   <td class="order"><i class="fa fa-reorder"></i></td>
                   <td class="w50 text-center sirano"><?php echo $i++; ?></td>
+                  <th>Ana Kategori</th>
                   <td><?php echo $item->title; ?></td>
                   <td class="text-center w100">
                     <input

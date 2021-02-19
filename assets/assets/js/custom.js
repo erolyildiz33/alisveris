@@ -61,73 +61,75 @@ $("#arama").on('keypress', function (e) {
 
             var durum = $(myid).attr('status');
             var sonid = $(myid).attr('addid');
-            altmenuler = $.parseJSON(AjaxGet(geturl + "getaltkategori/" + altid));
+            altmenuler = $.parseJSON($aramasonuc);
             var say = 1;
             $.each(altmenuler, (function (index, element) {
                 checked = (element.isActive == 1) ? "checked" : " ";
                 mylist = (AjaxGet(geturl + "getaltkategori/" + element.id)) ?
-                    '<button data-altid="' + element.id + '"style="margin-left: 10px;float: left;"' +
-                    'data-geturl="' + geturl + '"' +
-                    'data-getustid="' + element.id + '"' +
-                    'data-title="' + title + '"' +
-                    'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">' +
-                    '<i class="fa fa-cog"></i> Alt Kategori İşlemleri' +
-                    '</button>'
-                    : " ";
+                '<button data-altid="' + element.id + '"style="margin-left: 10px;float: left;"' +
+                'data-geturl="' + geturl + '"' +
+                'data-getustid="' + element.id + '"' +
+                'data-title="' + title + '"' +
+                'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">' +
+                '<i class="fa fa-cog"></i> Alt Kategori İşlemleri' +
+                '</button>'
+                : " ";
                 alticerikliste += '<tr>' +
-                    '<td><i class="fa fa-reorder"></i></td>' +
-                    '<td class="w50 text-center">' + say++ + '</td>' +
-                    '<td>' + element.title + '</td>' +
-                    '<td class="text-center w100">' +
-                    '<input data-url="' + geturl + 'isActiveSetter/' + element.id + '"' +
-                    'class="isActive altactive' + altid + '" type="checkbox" data-switchery data-color="#10c469" ' + checked + ' /></td>' +
-                    '<td class="w400 text-center">' +
-                    '<div class="text-center" style="margin-left: 30px;">' +
-                    '<a data-altid="' + element.id + '" data-title="' + element.title + '"' +
-                    'data-url="' + geturl + "save_sub" + '"' +
+                '<td><i class="fa fa-reorder"></i></td>' +
+                '<td class="w50 text-center">' + say++ + '</td>' +
+                '<td>' + title + '</td>' +
+                '<td>' + element.title + '</td>' +
+                '<td class="text-center w100">' +
+                '<input data-url="' + geturl + 'isActiveSetter/' + element.id + '"' +
+                'class="isActive altactive' + altid + '" type="checkbox" data-switchery data-color="#10c469" ' + checked + ' /></td>' +
+                '<td class="w400 text-center">' +
+                '<div class="text-center" style="margin-left: 30px;">' +
+                '<a data-altid="' + element.id + '" data-title="' + element.title + '"' +
+                'data-url="' + geturl + "save_sub" + '"' +
 
-                    'style="float: left;"' +
-                    'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">' +
-                    '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>' +
-                    mylist +
-                    ' </div>' +
-                    '</td>' +
-                    '<td class="text-center w300" >' +
-                    '<button ' +
-                    'data-url="' + geturl + 'delete/' + element.id + '"' +
-                    ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">' +
-                    '<i class="fa fa-trash"></i> Sil ' +
-                    '</button>' +
-                    '<button data-altid="' + element.id + '"' +
-                    'data-title="' + element.title + '"' +
-                    'data-url="' + geturl + 'update/' + element.id + '"' +
-                    'class="btn btn-sm btn-info btn-outline altguncelle" data-analiste="evet">' +
-                    '<i class="fa fa-pencil-square-o"></i> Düzenle' +
-                    '</button></td> </tr>';
+                'style="float: left;"' +
+                'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">' +
+                '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>' +
+                mylist +
+                ' </div>' +
+                '</td>' +
+                '<td class="text-center w300" >' +
+                '<button ' +
+                'data-url="' + geturl + 'delete/' + element.id + '"' +
+                ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">' +
+                '<i class="fa fa-trash"></i> Sil ' +
+                '</button>' +
+                '<button data-altid="' + element.id + '"' +
+                'data-title="' + element.title + '"' +
+                'data-url="' + geturl + 'update/' + element.id + '"' +
+                'class="btn btn-sm btn-info btn-outline altguncelle" data-analiste="evet">' +
+                '<i class="fa fa-pencil-square-o"></i> Düzenle' +
+                '</button></td> </tr>';
 
             }));
             var content = '<div class="row">' +
-                '<div class="col-md-12">' +
-                '<h4 class="m-b-lg">' +
-                '<b>' + title + '</b> Kategorisi Alt Kategorileri Listesi' +
-                '</h4>' +
-                '</div>' +
-                ' <div class="col-md-12">' +
-                '<div class="widget p-lg">' +
-                '<table class="table table-hover table-striped table-bordered alt-container">' +
-                '<thead>' +
-                '<th class="order"><i class="fa fa-reorder"></i></th>' +
-                '<th class="w50">Sıra</th>' +
-                '<th>Başlık</th>' +
-                '<th>Durumu</th>' +
-                '<th>Alt Kategori</th>' +
-                '<th>İşlem</th>' +
-                '</thead>' +
-                '<tbody>' + alticerikliste +
-                '</tbody></table>' +
-                '</div></div></div>' +
-                '<div id="altliste' + altid + '" status="false">' +
-                '</div>';
+            '<div class="col-md-12">' +
+            '<h4 class="m-b-lg">' +
+            '<b>' + title + '</b> Kategorisi Alt Kategorileri Listesi' +
+            '</h4>' +
+            '</div>' +
+            ' <div class="col-md-12">' +
+            '<div class="widget p-lg">' +
+            '<table class="table table-hover table-striped table-bordered alt-container">' +
+            '<thead>' +
+            '<th class="order"><i class="fa fa-reorder"></i></th>' +
+            '<th class="w50">Sıra</th>' +
+            '<th>Üst Kategori</th>'+
+            '<th>Başlık</th>' +
+            '<th>Durumu</th>' +
+            '<th>Alt Kategori</th>' +
+            '<th>İşlem</th>' +
+            '</thead>' +
+            '<tbody>' + alticerikliste +
+            '</tbody></table>' +
+            '</div></div></div>' +
+            '<div id="altliste' + altid + '" status="false">' +
+            '</div>';
             $(myid).attr('status', "true");
             $(myid).attr('addid', altid);
 
@@ -154,24 +156,24 @@ $(document).on('click', '.altguncelle', function () {
     var durum = $("#altekle").attr('status');
     var sonid = $("#altekle").attr('addid');
     var ekle = '<div class="row">' +
-        '<div class="col-md-12">' +
-        '<h4 class="m-b-lg">' +
-        '<b>' + title + '</b> Kategorisini düzenliyorsunuz' +
-        '</h4>' +
-        '</div>' +
-        '<div class="col-md-12">' +
-        '<div class="widget">' +
-        '<div class="widget-body">' +
-        '<form action="' + url + '" method="post">' +
-        '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
-        '<input type="hidden" name="anamenu" value="' + altid + '">' +
-        '<div class="form-group">' +
-        '<label>Başlık</label>' +
-        '<input class="form-control" placeholder="Başlık" name="title" value="' + title + '">' +
-        '</div>' +
-        '<button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>' +
-        '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
-        '</form></div></div></div></div>';
+    '<div class="col-md-12">' +
+    '<h4 class="m-b-lg">' +
+    '<b>' + title + '</b> Kategorisini düzenliyorsunuz' +
+    '</h4>' +
+    '</div>' +
+    '<div class="col-md-12">' +
+    '<div class="widget">' +
+    '<div class="widget-body">' +
+    '<form action="' + url + '" method="post">' +
+    '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
+    '<input type="hidden" name="anamenu" value="' + altid + '">' +
+    '<div class="form-group">' +
+    '<label>Başlık</label>' +
+    '<input class="form-control" placeholder="Başlık" name="title" value="' + title + '">' +
+    '</div>' +
+    '<button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>' +
+    '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
+    '</form></div></div></div></div>';
 
     if (durum == "true" && altid == sonid) {
         ekle = "";
@@ -249,9 +251,9 @@ $(document).on('click', '.alt-container .remove-btn,.content-container .remove-b
 
                     $('[data-switchery]').each(function () {
                         var $this = $(this),
-                            color = $this.attr('data-color') || '#188ae2',
-                            jackColor = $this.attr('data-jackColor') || '#ffffff',
-                            size = $this.attr('data-size') || 'default'
+                        color = $this.attr('data-color') || '#188ae2',
+                        jackColor = $this.attr('data-jackColor') || '#ffffff',
+                        size = $this.attr('data-size') || 'default'
 
                         new Switchery(this, {
                             color: color,
@@ -322,68 +324,70 @@ $(document).on('click', '.altgetir', function () {
     $.each(altmenuler, (function (index, element) {
         checked = (element.isActive == 1) ? "checked" : " ";
         mylist = (AjaxGet(geturl + "getaltkategori/" + element.id)) ?
-            '<button data-altid="' + element.id + '"style="margin-left: 10px;float: left;"' +
-            'data-geturl="' + geturl + '"' +
-            'data-getustid="' + altid + '"' +
-            'data-title="' + title + '"' +
-            'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">' +
-            '<i class="fa fa-cog"></i> Alt Kategori İşlemleri' +
-            '</button>'
-            : " ";
+        '<button data-altid="' + element.id + '"style="margin-left: 10px;float: left;"' +
+        'data-geturl="' + geturl + '"' +
+        'data-getustid="' + altid + '"' +
+        'data-title="' + element.title + '"' +
+        'class="btn btn-sm btn-warning btn-outline add-btn altgetir" data-analiste="evet">' +
+        '<i class="fa fa-cog"></i> Alt Kategori İşlemleri' +
+        '</button>'
+        : " ";
         alticerikliste += '<tr id="ord-' + element.id + '">' +
-            '<td class="order"><i class="fa fa-reorder"></i></td>' +
-            '<td class="w50 text-center sirano' + altid + '">' + say++ + '</td>' +
-            '<td>' + element.title + '</td>' +
-            '<td class="text-center w100">' +
-            '<input data-url="' + geturl + 'isActiveSetter/' + element.id + '"' +
-            'class="isActive altactive' + altid + '" type="checkbox" data-switchery data-color="#10c469" ' + checked + ' /></td>' +
-            '<td class="w400 text-center">' +
-            '<div class="text-center" style="margin-left: 30px;">' +
-            '<a data-altid="' + element.id + '" data-title="' + element.title + '"' +
-            'data-url="' + geturl + "save_sub" + '"' +
+        '<td class="order"><i class="fa fa-reorder"></i></td>' +
+        '<td class="w50 text-center sirano' + altid + '">' + say++ + '</td>' +
+        '<td>' + title + '</td>' +
+        '<td>' + element.title + '</td>' +
+        '<td class="text-center w100">' +
+        '<input data-url="' + geturl + 'isActiveSetter/' + element.id + '"' +
+        'class="isActive altactive' + altid + '" type="checkbox" data-switchery data-color="#10c469" ' + checked + ' /></td>' +
+        '<td class="w400 text-center">' +
+        '<div class="text-center" style="margin-left: 30px;">' +
+        '<a data-altid="' + element.id + '" data-title="' + element.title + '"' +
+        'data-url="' + geturl + "save_sub" + '"' +
 
-            'style="float: left;"' +
-            'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">' +
-            '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>' +
-            mylist +
-            ' </div>' +
-            '</td>' +
-            '<td class="text-center w300" >' +
-            '<button ' +
-            'data-url="' + geturl + 'delete/' + element.id + '"' +
-            ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">' +
-            '<i class="fa fa-trash"></i> Sil ' +
-            '</button>' +
-            '<button data-altid="' + element.id + '"' +
-            'data-title="' + element.title + '"' +
-            'data-url="' + geturl + 'update/' + element.id + '"' +
-            'class="btn btn-sm btn-info btn-outline altguncelle" data-analiste="evet">' +
-            '<i class="fa fa-pencil-square-o"></i> Düzenle' +
-            '</button></td> </tr>';
+        'style="float: left;"' +
+        'class="btn btn-sm btn-success btn-outline add-btn altekle" data-analiste="evet">' +
+        '<i class="fa fa-plus"></i> Alt Kategori Ekle </a>' +
+        mylist +
+        ' </div>' +
+        '</td>' +
+        '<td class="text-center w300" >' +
+        '<button ' +
+        'data-url="' + geturl + 'delete/' + element.id + '"' +
+        ' class="btn btn-sm btn-danger btn-outline remove-btn" style="margin-left: 30px;" data-analiste="evet">' +
+        '<i class="fa fa-trash"></i> Sil ' +
+        '</button>' +
+        '<button data-altid="' + element.id + '"' +
+        'data-title="' + element.title + '"' +
+        'data-url="' + geturl + 'update/' + element.id + '"' +
+        'class="btn btn-sm btn-info btn-outline altguncelle" data-analiste="evet">' +
+        '<i class="fa fa-pencil-square-o"></i> Düzenle' +
+        '</button></td> </tr>';
 
     }));
     var content = '<div class="row">' +
-        '<div class="col-md-12">' +
-        '<h4 class="m-b-lg">' +
-        '<b>' + title + '</b> Kategorisi Alt Kategorileri Listesi' +
-        '</h4>' +
-        '</div>' +
-        ' <div class="col-md-12">' +
-        '<div class="widget p-lg">' +
-        '<table class="table table-hover table-striped table-bordered alt-container">' +
-        '<thead>' +
-        '<th class="order"><i class="fa fa-reorder"></i></th>' +
-        '<th class="w50">Sıra</th>' +
-        '<th>Başlık</th>' +
-        '<th>Durumu</th>' +
-        '<th>Alt Kategori</th>' +
-        '<th>İşlem</th>' +
-        '</thead>' +
-        '<tbody class="sortable" data-sirano="' + altid + '" data-sorttableid="' + altid + '" data-url="' + geturl + 'rankSetter">' + alticerikliste +
-        '</tbody></table>' +
-        '</div></div></div>' +
-        '<div id="altliste' + altid + '" status="false">' +
-        '</div>';
+    '<div class="col-md-12">' +
+    '<h4 class="m-b-lg">' +
+    '<b>' + title + '</b> Kategorisi Alt Kategorileri Listesi' +
+    '</h4>' +
+    '</div>' +
+    ' <div class="col-md-12">' +
+    '<div class="widget p-lg">' +
+    '<table class="table table-hover table-striped table-bordered alt-container">' +
+    '<thead>' +
+    '<th class="order"><i class="fa fa-reorder"></i></th>' +
+    '<th class="w50">Sıra</th>' +
+    '<th>Üst Kategori</th>'+
+    '<th>Başlık</th>' +
+    '<th>Durumu</th>' +
+    '<th>Alt Kategori</th>' +
+    '<th>İşlem</th>' +
+    '</thead>' +
+    '<tbody class="sortable" data-sirano="' + altid + '" data-sorttableid="' + altid + '" data-url="' + geturl + 'rankSetter">' + alticerikliste +
+    '</tbody></table>' +
+    '</div></div></div>' +
+    '<div id="altliste' + altid + '" status="false">' +
+    '</div>';
 
     if (durum == "true" && altid == sonid) {
         content = "";
@@ -417,28 +421,28 @@ $(document).on('click', '.altekle', function () {
     var durum = $("#altekle").attr('status');
     var sonid = $("#altekle").attr('addid');
     var ekle = '<div class="row">' +
-        '<div class="col-md-12">' +
-        '<h4 class="m-b-lg">' +
-        '<b>' + title + '</b> Kategorisine Alt Kategorisi Ekle' +
-        '</h4>' +
-        '</div>' +
-        '<div class="col-md-12">' +
-        '<div class="widget">' +
-        '<div class="widget-body">' +
-        '<form action="' + url + '" method="post">' +
-        '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
-        '<input type="hidden" name="anamenu" value="' + altid + '">' +
-        '<div class="form-group">' +
-        '<label>Başlık</label>' +
-        '<input class="form-control" placeholder="Başlık" name="title">' +
-        '</div>' +
-        '<button type="submit" class="btn btn-primary btn-md btn-outline add_sub_category">Kaydet</button>' +
-        '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
-        '</form>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
+    '<div class="col-md-12">' +
+    '<h4 class="m-b-lg">' +
+    '<b>' + title + '</b> Kategorisine Alt Kategorisi Ekle' +
+    '</h4>' +
+    '</div>' +
+    '<div class="col-md-12">' +
+    '<div class="widget">' +
+    '<div class="widget-body">' +
+    '<form action="' + url + '" method="post">' +
+    '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
+    '<input type="hidden" name="anamenu" value="' + altid + '">' +
+    '<div class="form-group">' +
+    '<label>Başlık</label>' +
+    '<input class="form-control" placeholder="Başlık" name="title">' +
+    '</div>' +
+    '<button type="submit" class="btn btn-primary btn-md btn-outline add_sub_category">Kaydet</button>' +
+    '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
+    '</form>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
 
 
     if (durum == "true" && altid == sonid) {
@@ -465,27 +469,27 @@ $(document).on('click', '.yeniekle', function () {
     var durum = $("#altekle").attr('status');
     var sonid = $("#altekle").attr('addid');
     var ekle = '<div class="row">' +
-        '<div class="col-md-12">' +
-        '<h4 class="m-b-lg">' +
-        '<b>Yeni</b> Kategori Ekle' +
-        '</h4>' +
-        '</div>' +
-        '<div class="col-md-12">' +
-        '<div class="widget">' +
-        '<div class="widget-body">' +
-        '<form action="' + url + '" method="post">' +
-        '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
-        '<div class="form-group">' +
-        '<label>Başlık</label>' +
-        '<input class="form-control" placeholder="Başlık" name="title">' +
-        '</div>' +
-        '<button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>' +
-        '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
-        '</form>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
+    '<div class="col-md-12">' +
+    '<h4 class="m-b-lg">' +
+    '<b>Yeni</b> Kategori Ekle' +
+    '</h4>' +
+    '</div>' +
+    '<div class="col-md-12">' +
+    '<div class="widget">' +
+    '<div class="widget-body">' +
+    '<form action="' + url + '" method="post">' +
+    '<input type="hidden" name="csrf_test_name" value="' + $("#csrf_test_name").data("csrf") + '">' +
+    '<div class="form-group">' +
+    '<label>Başlık</label>' +
+    '<input class="form-control" placeholder="Başlık" name="title">' +
+    '</div>' +
+    '<button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>' +
+    '<span class="btn btn-md btn-danger btn-outline iptalaltekle">İptal</span>' +
+    '</form>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
 
 
     if (durum == "true" && altid == sonid) {
@@ -520,9 +524,9 @@ $(document).ready(function () {
 
                 $('[data-switchery]').each(function () {
                     var $this = $(this),
-                        color = $this.attr('data-color') || '#188ae2',
-                        jackColor = $this.attr('data-jackColor') || '#ffffff',
-                        size = $this.attr('data-size') || 'default'
+                    color = $this.attr('data-color') || '#188ae2',
+                    jackColor = $this.attr('data-jackColor') || '#ffffff',
+                    size = $this.attr('data-size') || 'default'
 
                     new Switchery(this, {
                         color: color,
@@ -573,9 +577,9 @@ $(document).ready(function () {
 
                 $('[data-switchery]').each(function () {
                     var $this = $(this),
-                        color = $this.attr('data-color') || '#188ae2',
-                        jackColor = $this.attr('data-jackColor') || '#ffffff',
-                        size = $this.attr('data-size') || 'default'
+                    color = $this.attr('data-color') || '#188ae2',
+                    jackColor = $this.attr('data-jackColor') || '#ffffff',
+                    size = $this.attr('data-size') || 'default'
 
                     new Switchery(this, {
                         color: color,
