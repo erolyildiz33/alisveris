@@ -416,13 +416,16 @@
                 var $trigger = $(e.target);
                 $trigger.is('[data-toggle="collapse"]') || ($trigger = $trigger.parents('[data-toggle="collapse"]'));
                 var $target = $($trigger.attr('data-target'));
-                if ($target.attr('id') === 'navbar-search' && window.location.pathname.split("/").pop()!=="product_categories") {
+                if ($target.attr('id') === 'navbar-search' ) {
                     if (!$trigger.hasClass('collapsed')) {
+                        
                         var $field = $target.find('input[type="search"]').focus();
+
                         document.querySelector($field.selector).setSelectionRange(0, $field.val().length);
                     } else {
                         $target.find('input[type="search"]').blur();
                     }
+
                 } else if ($target.attr('id') === 'app-navbar-collapse') {
                     $body.toggleClass('navbar-collapse-in', !$trigger.hasClass('collapsed'));
                 }

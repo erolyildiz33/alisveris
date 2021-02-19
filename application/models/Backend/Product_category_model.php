@@ -25,12 +25,12 @@ class Product_category_model extends CI_Model
     {
         return 
 
-        $this->db->select("IF(ustmenu = 0, 'Ana Kategori', (select ara.title from Product_categories as ara where ara.id=ana.ustmenu)) as ustname,ana.*)")
-            ->from("$this->tableName ana")
+        $this->db->select("product_categories.*")->select("IF(product_categories.ustmenu = 0, 'Ana Kategori', (select ara.title from product_categories as ara where ara.id=product_categories.ustmenu)) as ustname")
+            ->from($this->tableName)
             ->like($like)->get()->result();
 
 
-SELECT IF(ustmenu = 0, "ana Kategori", (select ara.title from Product_categories as ara where ara.id=ana.ustmenu)) as ustname,ana.* FROM Product_categories as ana WHERE `title` LIKE '%ceket%' ESCAPE '!'
+//SELECT IF(ustmenu = 0, "ana Kategori", (select ara.title from Product_categories as ara where ara.id=ana.ustmenu)) as ustname,ana.* FROM Product_categories as ana WHERE `title` LIKE '%ceket%' ESCAPE '!'
 
 
             

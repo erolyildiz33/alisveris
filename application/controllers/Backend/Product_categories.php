@@ -41,89 +41,162 @@ class product_categories extends CI_Controller
     }
 
     public function findKategori(){
+        if($this->input->post("title")!=null){ 
+            $result = $this->product_category_model->get_like(array("title"=>$this->input->post("title")));
+            if($result)
+                echo json_encode($result);
+            else echo "yok";
+        }
 
-       $result = $this->product_category_model->get_like(array("title"=>$this->input->post("title")));
-       if($result)
-        echo json_encode($result);
-   }
-   public function getAltKategori($ustmenuid=null){
-    $result=$this->product_category_model->get_all(
-        array("ustmenu"=>$ustmenuid), "rank ASC"
-    );
-    if($result)
-        echo json_encode($result);
+        else echo "bos";
+    }
+    public function getAltKategori($ustmenuid=null){
+        $result=$this->product_category_model->get_all(
+            array("ustmenu"=>$ustmenuid), "rank ASC"
+        );
+        if($result)
+            echo json_encode($result);
 
-}
-public function tumkategori($ustmenu = 0) {
-
-
-    $data = $this->product_category_model->get_categories($ustmenu);
-
-    echo json_encode($data);
-}
+    }
+    public function tumkategori($ustmenu = 0) {
 
 
+        $data = $this->product_category_model->get_categories($ustmenu);
 
-public function new_form(){
+        echo json_encode($data);
+    }
 
-    $viewData = new stdClass();
 
-    /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
-    $viewData->viewFolder = $this->viewFolder;
-    $viewData->subViewFolder = "add";
 
-    $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    public function new_form(){
 
-}
+        $viewData = new stdClass();
 
-public function new_sub_form($id){
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "add";
 
-    $viewData = new stdClass();
-    $item = $this->product_category_model->get(
-        array(
-            "id"    => $id,
-        )
-    );
-    /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
-    $viewData->viewFolder = $this->viewFolder;
-    $viewData->subViewFolder = "sub_add";
-    $viewData->item = $item;
-    $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
 
-}
+    }
 
-public function save(){
+    public function new_sub_form($id){
 
-    $this->load->library("form_validation");
+        $viewData = new stdClass();
+        $item = $this->product_category_model->get(
+            array(
+                "id"    => $id,
+            )
+        );
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "sub_add";
+        $viewData->item = $item;
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+
+    }
+
+    public function save(){
+
+        $this->load->library("form_validation");
 
         // Kurallar yazilir..
 
-    $this->form_validation->set_rules("title", "Başlık", "required|trim");
+        $this->form_validation->set_rules("title", "Başlık", "required|trim");
 
-    $this->form_validation->set_message(
-        array(
-            "required"  => "<b>{field}</b> alanı doldurulmalıdır"
-        )
-    );
+        $this->form_validation->set_message(
+            array(
+                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+            )
+        );
 
         // Form Validation Calistirilir..
-    $validate = $this->form_validation->run();
+        $validate = $this->form_validation->run();
 
-    if($validate){
-        $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",0)->limit(1)->order_by("rank","desc")->get()->row();
+        if($validate){
+            $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",0)->limit(1)->order_by("rank","desc")->get()->row();
 
             // Upload Süreci...
-        $insert = $this->product_category_model->add(
+            $insert = $this->product_category_model->add(
+                array(
+                    "title"         => $this->input->post("title"),
+                    "isActive"      => 1,
+                    "createdAt"     => date("Y-m-d H:i:s"),
+                    "rank"          =>$rank->rank+1,
+                )
+            );
+
+            // TODO Alert sistemi eklenecek...
+            if($insert){
+
+                $alert = array(
+                    "title" => "İşlem Başarılı",
+                    "text" => "Kayıt başarılı bir şekilde eklendi",
+                    "type"  => "success"
+                );
+
+            } else {
+
+                $alert = array(
+                    "title" => "İşlem Başarısız",
+                    "text" => "Kayıt Ekleme sırasında bir problem oluştu",
+                    "type"  => "error"
+                );
+            }
+
+            // İşlemin Sonucunu Session'a yazma işlemi...
+            $this->session->set_flashdata("alert", $alert);
+
+            redirect(base_url("backend/product_categories"));
+
+        } else {
+
+            $viewData = new stdClass();
+
+            /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+            $viewData->viewFolder = $this->viewFolder;
+            $viewData->subViewFolder = "add";
+            $viewData->form_error = true;
+
+            $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        }
+
+    }
+
+
+
+    public function save_sub(){
+        if (!strlen(trim($this->input->post('title')))>0){
+           $alert = array(
+            "title" => "İşlem Başarısız",
+            "text" => "<b> Başlık </b> alanı doldurulmalıdır",
+            "type"  => "error"
+        );
+           $this->session->set_flashdata("alert", $alert);
+
+           redirect(base_url("backend/product_categories"));
+
+
+       }
+       else{
+
+         $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",$this->input->post("anamenu"))->limit(1)->order_by("rank","desc")->get()->row();
+
+
+
+
+         $insert = $this->product_category_model->add(
             array(
                 "title"         => $this->input->post("title"),
                 "isActive"      => 1,
                 "createdAt"     => date("Y-m-d H:i:s"),
-                "rank"          =>$rank->rank+1,
+                "ustmenu" =>$this->input->post("anamenu"),
+                "rank"          =>(($rank)?$rank->rank+1:0),
             )
         );
 
             // TODO Alert sistemi eklenecek...
-        if($insert){
+         if($insert){
 
             $alert = array(
                 "title" => "İşlem Başarılı",
@@ -145,77 +218,8 @@ public function save(){
 
         redirect(base_url("backend/product_categories"));
 
-    } else {
 
-        $viewData = new stdClass();
-
-        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
-        $viewData->viewFolder = $this->viewFolder;
-        $viewData->subViewFolder = "add";
-        $viewData->form_error = true;
-
-        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
-
-}
-
-
-
-public function save_sub(){
-    if (!strlen(trim($this->input->post('title')))>0){
-       $alert = array(
-        "title" => "İşlem Başarısız",
-        "text" => "<b> Başlık </b> alanı doldurulmalıdır",
-        "type"  => "error"
-    );
-       $this->session->set_flashdata("alert", $alert);
-
-       redirect(base_url("backend/product_categories"));
-
-
-   }
-   else{
-
-     $rank=$this->db->select("rank")->from("product_categories")->where("ustmenu",$this->input->post("anamenu"))->limit(1)->order_by("rank","desc")->get()->row();
-
-
-
-
-     $insert = $this->product_category_model->add(
-        array(
-            "title"         => $this->input->post("title"),
-            "isActive"      => 1,
-            "createdAt"     => date("Y-m-d H:i:s"),
-            "ustmenu" =>$this->input->post("anamenu"),
-            "rank"          =>(($rank)?$rank->rank+1:0),
-        )
-    );
-
-            // TODO Alert sistemi eklenecek...
-     if($insert){
-
-        $alert = array(
-            "title" => "İşlem Başarılı",
-            "text" => "Kayıt başarılı bir şekilde eklendi",
-            "type"  => "success"
-        );
-
-    } else {
-
-        $alert = array(
-            "title" => "İşlem Başarısız",
-            "text" => "Kayıt Ekleme sırasında bir problem oluştu",
-            "type"  => "error"
-        );
-    }
-
-            // İşlemin Sonucunu Session'a yazma işlemi...
-    $this->session->set_flashdata("alert", $alert);
-
-    redirect(base_url("backend/product_categories"));
-
-
-}
 }
 
 public function update_form($id){
